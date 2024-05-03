@@ -1,23 +1,24 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using ConApp.Models;
+using WinForm.Models;
 
 #nullable disable
 
-namespace ConApp.Data
+namespace WinForm.Data
 {
-    public partial class DbContext : DbContext
+    public partial class SOLDbContext : DbContext
     {
-        public DbContext()
+        public SOLDbContext()
         {
         }
 
-        public DbContext(DbContextOptions<DbContext> options)
+        public SOLDbContext(DbContextOptions<SOLDbContext> options)
             : base(options)
         {
         }
 
+        public virtual DbSet<TSOLMProduct> TSOLMProducts { get; set; }
         public virtual DbSet<TSOLSConfig> TSOLSConfigs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,6 +33,22 @@ namespace ConApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<TSOLMProduct>(entity =>
+            {
+                entity.HasKey(e => e.FTPdtCode)
+                    .HasName("PK__TSOLMPro__83E118503E791227");
+
+                entity.ToTable("TSOLMProduct");
+
+                entity.Property(e => e.FTPdtCode).HasMaxLength(5);
+
+                entity.Property(e => e.FCPdtPri).HasColumnType("decimal(18, 4)");
+
+                entity.Property(e => e.FTPdtName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
 
             modelBuilder.Entity<TSOLSConfig>(entity =>
             {

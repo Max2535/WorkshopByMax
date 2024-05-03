@@ -5,9 +5,14 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinForm", "WinForm\WinForm.csproj", "{8551E108-D96B-4DD9-B438-8D7F11838284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{2C71A57E-58DA-494F-9A0F-818C1D3F8DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{2C71A57E-58DA-494F-9A0F-818C1D3F8DB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConApp", "ConApp\ConApp.csproj", "{73673903-2220-4B6F-8180-C982B15D5D78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConApp", "ConApp\ConApp.csproj", "{73673903-2220-4B6F-8180-C982B15D5D78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB712204-6B78-4051-96AB-58785414C86E}"
+	ProjectSection(SolutionItems) = preProject
+		script update database.txt = script update database.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

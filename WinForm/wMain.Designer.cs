@@ -46,7 +46,7 @@
             // 
             // ocmProducts
             // 
-            ocmProducts.Location = new System.Drawing.Point(32, 72);
+            ocmProducts.Location = new System.Drawing.Point(56, 76);
             ocmProducts.Name = "ocmProducts";
             ocmProducts.Size = new System.Drawing.Size(713, 53);
             ocmProducts.TabIndex = 2;
@@ -56,7 +56,7 @@
             // 
             // ocmSelling
             // 
-            ocmSelling.Location = new System.Drawing.Point(32, 149);
+            ocmSelling.Location = new System.Drawing.Point(56, 152);
             ocmSelling.Name = "ocmSelling";
             ocmSelling.Size = new System.Drawing.Size(713, 53);
             ocmSelling.TabIndex = 3;
@@ -66,7 +66,7 @@
             // 
             // ocmOrders
             // 
-            ocmOrders.Location = new System.Drawing.Point(32, 234);
+            ocmOrders.Location = new System.Drawing.Point(56, 234);
             ocmOrders.Name = "ocmOrders";
             ocmOrders.Size = new System.Drawing.Size(713, 53);
             ocmOrders.TabIndex = 4;
@@ -78,7 +78,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 450);
+            ClientSize = new System.Drawing.Size(832, 337);
             Controls.Add(ocmOrders);
             Controls.Add(ocmSelling);
             Controls.Add(ocmProducts);
