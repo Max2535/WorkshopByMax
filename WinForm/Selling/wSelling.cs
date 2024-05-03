@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WorkshopByMax
+namespace WinForm
 {
-    public partial class wProducts : Form
+    public partial class wSelling : Form
     {
-        public wProducts()
+        public wSelling()
         {
             InitializeComponent();
         }

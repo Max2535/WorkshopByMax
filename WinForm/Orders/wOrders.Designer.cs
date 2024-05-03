@@ -1,4 +1,4 @@
-﻿namespace WorkshopByMax
+﻿namespace WinForm
 {
     partial class wOrders
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 
-namespace WorkshopByMax
+namespace WinForm
 {
     public partial class wMain : Form
     {
@@ -21,6 +22,7 @@ namespace WorkshopByMax
         private void ocmProducts_Click(object sender, EventArgs e)
         {
             wProducts wPdt = new wProducts();
+            //wPdt. += wProducts_DataReceived;
             wPdt.Show();
         }
 
@@ -34,6 +36,12 @@ namespace WorkshopByMax
         {
             wOrders wOrd = new wOrders();
             wOrd.Show();
+        }
+
+        private void wProducts_DataReceived(object sender, DataReceivedEventArgs e)
+        {
+            // รับข้อมูลที่ส่งมาจาก Form ใหม่และแสดงใน MessageBox
+            MessageBox.Show($"Data received: {e.Data}");
         }
     }
 }
