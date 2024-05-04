@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             dataGridView1 = new System.Windows.Forms.DataGridView();
-            label1 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
-            button1 = new System.Windows.Forms.Button();
-            button2 = new System.Windows.Forms.Button();
+            olaPdtCode = new System.Windows.Forms.Label();
+            obtPdtCode = new System.Windows.Forms.TextBox();
+            ocmSavePdt = new System.Windows.Forms.Button();
+            ocmResetPdt = new System.Windows.Forms.Button();
             pcloader = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcloader).BeginInit();
@@ -48,45 +48,45 @@
             dataGridView1.Size = new System.Drawing.Size(776, 340);
             dataGridView1.TabIndex = 0;
             // 
-            // label1
+            // olaPdtCode
             // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(42, 32);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(72, 25);
-            label1.TabIndex = 1;
-            label1.Text = "ชื่อสินค้า";
+            olaPdtCode.AutoSize = true;
+            olaPdtCode.Location = new System.Drawing.Point(42, 32);
+            olaPdtCode.Name = "olaPdtCode";
+            olaPdtCode.Size = new System.Drawing.Size(72, 25);
+            olaPdtCode.TabIndex = 1;
+            olaPdtCode.Text = "ชื่อสินค้า";
             // 
-            // textBox1
+            // obtPdtCode
             // 
-            textBox1.Location = new System.Drawing.Point(124, 29);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(354, 31);
-            textBox1.TabIndex = 2;
+            obtPdtCode.Location = new System.Drawing.Point(124, 29);
+            obtPdtCode.Name = "obtPdtCode";
+            obtPdtCode.Size = new System.Drawing.Size(354, 31);
+            obtPdtCode.TabIndex = 2;
             // 
-            // button1
+            // ocmSavePdt
             // 
-            button1.Location = new System.Drawing.Point(485, 28);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(112, 34);
-            button1.TabIndex = 3;
-            button1.Text = "ค้นหา";
-            button1.UseVisualStyleBackColor = true;
+            ocmSavePdt.Location = new System.Drawing.Point(485, 28);
+            ocmSavePdt.Name = "ocmSavePdt";
+            ocmSavePdt.Size = new System.Drawing.Size(112, 34);
+            ocmSavePdt.TabIndex = 3;
+            ocmSavePdt.Text = "ค้นหา";
+            ocmSavePdt.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // ocmResetPdt
             // 
-            button2.Location = new System.Drawing.Point(602, 29);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(112, 34);
-            button2.TabIndex = 4;
-            button2.Text = "เพิ่มสินค้า";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            ocmResetPdt.Location = new System.Drawing.Point(602, 29);
+            ocmResetPdt.Name = "ocmResetPdt";
+            ocmResetPdt.Size = new System.Drawing.Size(112, 34);
+            ocmResetPdt.TabIndex = 4;
+            ocmResetPdt.Text = "เพิ่มสินค้า";
+            ocmResetPdt.UseVisualStyleBackColor = true;
+            ocmResetPdt.Click += ocmResetPdt_Click;
             // 
             // pcloader
             // 
             pcloader.Image = Properties.Resources.Loading;
-            pcloader.Location = new System.Drawing.Point(160, -13);
+            pcloader.Location = new System.Drawing.Point(122, 210);
             pcloader.Name = "pcloader";
             pcloader.Size = new System.Drawing.Size(475, 480);
             pcloader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -100,10 +100,10 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(pcloader);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(textBox1);
-            Controls.Add(label1);
+            Controls.Add(ocmResetPdt);
+            Controls.Add(ocmSavePdt);
+            Controls.Add(obtPdtCode);
+            Controls.Add(olaPdtCode);
             Controls.Add(dataGridView1);
             Name = "wProducts";
             Text = "รายการสินค้า";
@@ -116,10 +116,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label olaPdtCode;
+        private System.Windows.Forms.TextBox obtPdtCode;
+        private System.Windows.Forms.Button ocmSavePdt;
+        private System.Windows.Forms.Button ocmResetPdt;
         private System.Windows.Forms.PictureBox pcloader;
     }
 }

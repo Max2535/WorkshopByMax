@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WinForm.Data;
 using WinForm.Models;
 using WinForm.Products;
+using WinForm.Services;
 
 namespace WinForm
 {
@@ -23,21 +24,26 @@ namespace WinForm
 
         private void LoadDataToDataGridView()
         {
-            pcloader.Visible = true;
-            pcloader.Dock = DockStyle.Fill;
-            using (var context = new SOLDbContext())
-            {
-                var data = context.TSOLMProducts.ToList();
+            //pcloader.Visible = true;
+            //pcloader.Dock = DockStyle.Fill;
+            //using (var context = new SOLDbContext())
+            //{
+            //    var data = context.TSOLMProducts.ToList();
 
-                dataGridView1.DataSource = data;
+            //    dataGridView1.DataSource = data;
 
-                dataGridView1.Columns[0].HeaderText = "รหัสสินค้า";
-                pcloader.Visible = false;
-            }
+            //    dataGridView1.Columns[0].HeaderText = "รหัสสินค้า";
+            //    pcloader.Visible = false;
+            //}
+
+            var data = ProductService.getProduct();
+            dataGridView1.DataSource = data;
+
+            dataGridView1.Columns[0].HeaderText = "รหัสสินค้า";
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ocmResetPdt_Click(object sender, EventArgs e)
         {
             wAddProduct wAddPdt = new wAddProduct();
             wAddPdt.Show();

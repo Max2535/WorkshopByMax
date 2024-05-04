@@ -8,6 +8,6 @@ namespace WebApi.Services
     public interface IProductService
     {
         public List<cmlResProduct> getProduct();
-        public bool addProduct(cmlDataShopOnline oShopOnline);
+        public bool addProduct(cmlDataProduct oShopOnline);
     }
 }

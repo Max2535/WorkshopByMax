@@ -16,7 +16,7 @@ namespace WebApi.Services
             _context = context;
         }
 
-        public bool addProduct(cmlDataShopOnline oShopOnline)
+        public bool addProduct(cmlDataProduct oShopOnline)
         {
             throw new System.NotImplementedException();
         }
