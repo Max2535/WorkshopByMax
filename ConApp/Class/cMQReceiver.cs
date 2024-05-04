@@ -237,7 +237,7 @@ namespace WorkShopRabbitMQ.Class
                                     Thread.Sleep(500);
                                     break;
 
-                                case "QueueMax":
+                                case "MaxQueueAddPdt":
                                     try
                                     {
                                         Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
