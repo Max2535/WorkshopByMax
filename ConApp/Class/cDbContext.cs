@@ -5,15 +5,15 @@ using ConApp.Models;
 
 #nullable disable
 
-namespace ConApp.Data
+namespace ConApp.Class
 {
-    public partial class SOLDbContext : DbContext
+    public partial class cDbContext : DbContext
     {
-        public SOLDbContext()
+        public cDbContext()
         {
         }
 
-        public SOLDbContext(DbContextOptions<SOLDbContext> options)
+        public cDbContext(DbContextOptions<cDbContext> options)
             : base(options)
         {
         }

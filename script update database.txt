@@ -1,2 +1,2 @@
 dotnet tool install --global dotnet-ef --version 6.0.5
-dotnet ef dbcontext scaffold "Server=localhost;User Id=sa;Password=8bfw,jvvd;Database=AdaShopeOnLine.MDB" "Microsoft.EntityFrameworkCore.SqlServer" -f --use-database-names -o Models --context-dir Data  -c SOLDbContext
+dotnet ef dbcontext scaffold "Server=localhost;User Id=sa;Password=8bfw,jvvd;Database=AdaShopeOnLine.MDB" "Microsoft.EntityFrameworkCore.SqlServer" -f --use-database-names -o Models --context-dir Class  -c cDbContext

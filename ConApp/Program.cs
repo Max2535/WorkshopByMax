@@ -1,24 +1,24 @@
-﻿using ConApp.Data;
+﻿using ConApp.Class;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Configuration;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
+using WorkShopRabbitMQ.Class;
+using WorkShopRabbitMQ.Models.Config;
 
 namespace ConApp
 {
     internal class Program
     {
         private static IHostBuilder CreateHostBuilder(string[] args) =>
-     Host.CreateDefaultBuilder(args)
+        Host.CreateDefaultBuilder(args)
          .ConfigureAppConfiguration(LoadConfiguration)
          .ConfigureServices(ConfigureServices);
-        //static void Main(string[] args)
-        //{
-        //    Console.WriteLine("Hello World!");
-        //}
 
         private static async Task Main(string[] args)
         {
@@ -35,9 +35,8 @@ namespace ConApp
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            Console.WriteLine(host.Configuration.GetConnectionString("Database"));
             services
-                .AddDbContext<SOLDbContext>(options =>
+                .AddDbContext<cDbContext>(options =>
                 {
                     options.UseSqlServer(host.Configuration.GetConnectionString("Database"));
                 }, ServiceLifetime.Singleton)
