@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WorkShopWebService.Models.WebService.Response.Base
+namespace BuildingBlocks.Models.WebService.Response.Base
 {
     /// <summary>
-    /// Response an Object
+    /// Response Object by List
     /// </summary>
     /// <typeparam name="T"></typeparam>
-	public class cmlResObject<T> : cmlResBase
+	public class cmlResList<T> : cmlResBase
     {
         /// <summary>
-        /// Obj Item Return.
+        /// Array Obj Item Return.
         /// </summary>
-        public T roItem { get; set; }
+        public List<T> raItems { get; set; }
     }
 }

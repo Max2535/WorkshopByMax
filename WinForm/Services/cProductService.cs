@@ -3,25 +3,26 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using WorkShopWebService.Models.WebService.Request.ShopOnline;
-using WorkShopWebService.Models.WebService.Response.Base;
-using WorkShopWebService.Models.WebService.Response.ShopOnline;
+using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using BuildingBlocks.Models.WebService.Response.Base;
+using BuildingBlocks.Models.WebService.Response.ShopOnline;
 
 namespace WinForm.Services
 {
-    public class ProductService
+    public class cProductService
     {
-        public static List<cmlResProduct> getProduct()
+        public static List<cmlResProduct> C_GETaoProduct()
         {
             try
             {
+                //Test
                 return new List<cmlResProduct>();
                 var options = new RestClientOptions("http://localhost:50210")
                 {
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/ShopOnline/GetProduct", Method.Get);
+                var request = new RestRequest("/ShopOnline/C_GETaoProduct", Method.Get);
                 request.AddHeader("X-Api-Key", "123456789");
                 RestResponse response = client.Execute(request);
                 Console.WriteLine(response.Content);
@@ -33,7 +34,7 @@ namespace WinForm.Services
             }
         }
 
-        public static bool addProduct(cmlDataProduct poData)
+        public static bool C_ADDbProduct(cmlDataProduct poData)
         {
             try
             {
@@ -49,8 +50,8 @@ namespace WinForm.Services
                 var body = tMsgJson;
                 request.AddStringBody(body, DataFormat.Json);
                 RestResponse response = client.Execute(request);
-                Console.WriteLine(response.Content);
-
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                //TODO::
                 return true;
             }
             catch (Exception)

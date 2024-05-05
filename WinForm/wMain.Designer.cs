@@ -32,6 +32,7 @@
             ocmProducts = new System.Windows.Forms.Button();
             ocmSelling = new System.Windows.Forms.Button();
             ocmOrders = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // olaMainTitle
@@ -74,11 +75,21 @@
             ocmOrders.UseVisualStyleBackColor = true;
             ocmOrders.Click += ocmOrders_Click;
             // 
+            // button1
+            // 
+            button1.Location = new System.Drawing.Point(56, 315);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(713, 53);
+            button1.TabIndex = 5;
+            button1.Text = "รายการสต็อก";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // wMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(832, 337);
+            ClientSize = new System.Drawing.Size(816, 416);
+            Controls.Add(button1);
             Controls.Add(ocmOrders);
             Controls.Add(ocmSelling);
             Controls.Add(ocmProducts);
@@ -94,5 +105,6 @@
         private System.Windows.Forms.Button ocmProducts;
         private System.Windows.Forms.Button ocmSelling;
         private System.Windows.Forms.Button ocmOrders;
+        private System.Windows.Forms.Button button1;
     }
 }

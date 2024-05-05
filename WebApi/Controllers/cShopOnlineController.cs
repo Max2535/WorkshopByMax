@@ -2,26 +2,26 @@
 using System;
 using System.Linq;
 using WebApi.Services;
-using WorkShopWebService.Class;
-using WorkShopWebService.Models.WebService.Request.ShopOnline;
-using WorkShopWebService.Models.WebService.Response.Base;
-using WorkShopWebService.Models.WebService.Response.ShopOnline;
+using BuildingBlocks.Class;
+using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using BuildingBlocks.Models.WebService.Response.Base;
+using BuildingBlocks.Models.WebService.Response.ShopOnline;
 
-namespace WorkShopWebService.Controllers
+namespace BuildingBlocks.Controllers
 {
     [Route("ShopOnline")]
     public class cShopOnlineController : Controller
     {
-        private readonly IProductService _product;
+        private readonly IcProductService _product;
 
-        public cShopOnlineController(IProductService product)
+        public cShopOnlineController(IcProductService product)
         {
             _product=product;
         }
 
         [HttpPost]
         [Route("AddProduct")]
-        public cmlResBase POST_EXPoShopOnline([FromBody] cmlReqShopOnline poData)
+        public cmlResBase POST_EXPoAddProduct([FromBody] cmlDataProduct paoDataProduct)
         {
             cmlResBase oResult;
             cRabbitMQ oRabbitMQ;
@@ -32,7 +32,7 @@ namespace WorkShopWebService.Controllers
                 oResult = new cmlResBase();
 
                 //Check Model
-                if (poData == null)
+                if (paoDataProduct == null)
                 {
                     oResult.rtCode = cMS.tMS_RespCode700;
                     oResult.rtDesc = cMS.tMS_RespDesc700;
@@ -59,9 +59,9 @@ namespace WorkShopWebService.Controllers
                 oRabbitMQ = new cRabbitMQ();
 
                 //Convert to string json
-                string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(poData);
+                string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(paoDataProduct);
                 //Publish to rabbitMQ
-                if (oRabbitMQ.C_PRCbSendData2Srv(tMsgJson, true))
+                if (oRabbitMQ.C_PRCbSendData2Srv(tMsgJson, "MaxQueueAddPdt", true))
                 {
                     oResult.rtCode = cMS.tMS_RespCode001;
                     oResult.rtDesc = cMS.tMS_RespDesc001;
@@ -83,13 +83,13 @@ namespace WorkShopWebService.Controllers
             }
             finally
             {
-                poData = null;
+                paoDataProduct = null;
                 oRabbitMQ = null;
             }
         }
 
         [HttpGet]
-        [Route("GetProduct")]
+        [Route("C_GETaoProduct")]
         public cmlResList<cmlResProduct> GET_EXPoShopOnlineResObject()
         {
             cmlResList<cmlResProduct> oResult;
@@ -116,7 +116,7 @@ namespace WorkShopWebService.Controllers
                 //...
                 //...
 
-                oResult.raItems = _product.getProduct();
+                oResult.raItems = _product.C_GETaoProduct();
                 oResult.rtCode = cMS.tMS_RespCode001;
                 oResult.rtDesc = cMS.tMS_RespDesc001;
                 return oResult;

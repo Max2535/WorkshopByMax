@@ -19,6 +19,9 @@
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Compile Update="Properties\Resources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>

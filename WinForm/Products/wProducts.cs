@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WinForm.Data;
+using WinForm.Class;
 using WinForm.Models;
 using WinForm.Products;
 using WinForm.Services;
@@ -26,7 +26,7 @@ namespace WinForm
         {
             //pcloader.Visible = true;
             //pcloader.Dock = DockStyle.Fill;
-            //using (var context = new SOLDbContext())
+            //using (var context = new cDbContext())
             //{
             //    var data = context.TSOLMProducts.ToList();
 
@@ -36,7 +36,7 @@ namespace WinForm
             //    pcloader.Visible = false;
             //}
 
-            var data = ProductService.getProduct();
+            var data = cProductService.C_GETaoProduct();
             dataGridView1.DataSource = data;
 
             dataGridView1.Columns[0].HeaderText = "รหัสสินค้า";

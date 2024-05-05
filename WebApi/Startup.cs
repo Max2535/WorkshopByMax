@@ -14,8 +14,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using WebApi.Class;
 using WebApi.Services;
-using WorkShopWebService.Class;
-using WorkShopWebService.Models.Setting;
+using BuildingBlocks.Class;
+using BuildingBlocks.Models.Setting;
 
 namespace WebApi
 {
@@ -69,7 +69,7 @@ namespace WebApi
                }, ServiceLifetime.Singleton);
                 services.AddControllers();
 
-                services.AddScoped<IProductService, ProductService>();
+                services.AddScoped<IcProductService, cProductService>();
 
                 const string tReqHeaders = "X-Api-Key";
                 services.AddSwaggerGen(c =>

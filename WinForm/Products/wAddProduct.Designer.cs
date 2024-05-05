@@ -1,4 +1,6 @@
-﻿namespace WinForm.Products
+﻿using System.Windows.Forms;
+
+namespace WinForm.Products
 {
     partial class wAddProduct
     {
@@ -28,16 +30,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            obtPdtCode = new System.Windows.Forms.TextBox();
-            obtPdtName = new System.Windows.Forms.TextBox();
-            obtPdtQty = new System.Windows.Forms.TextBox();
-            obtPdtPri = new System.Windows.Forms.TextBox();
-            olaPdtCode = new System.Windows.Forms.Label();
-            olaPdtName = new System.Windows.Forms.Label();
-            olaPdtQty = new System.Windows.Forms.Label();
-            olaPdtPri = new System.Windows.Forms.Label();
-            ocmSavePdt = new System.Windows.Forms.Button();
-            ocmResetPdt = new System.Windows.Forms.Button();
+            obtPdtCode = new TextBox();
+            obtPdtName = new TextBox();
+            obtPdtQty = new TextBox();
+            obtPdtPri = new TextBox();
+            olaPdtCode = new Label();
+            olaPdtName = new Label();
+            olaPdtQty = new Label();
+            olaPdtPri = new Label();
+            ocmSavePdt = new Button();
+            ocmResetPdt = new Button();
+            opbImgPdt = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)opbImgPdt).BeginInit();
             SuspendLayout();
             // 
             // obtPdtCode
@@ -49,21 +53,21 @@
             // 
             // obtPdtName
             // 
-            obtPdtName.Location = new System.Drawing.Point(155, 59);
+            obtPdtName.Location = new System.Drawing.Point(155, 74);
             obtPdtName.Name = "obtPdtName";
             obtPdtName.Size = new System.Drawing.Size(368, 31);
             obtPdtName.TabIndex = 1;
             // 
             // obtPdtQty
             // 
-            obtPdtQty.Location = new System.Drawing.Point(155, 96);
+            obtPdtQty.Location = new System.Drawing.Point(155, 131);
             obtPdtQty.Name = "obtPdtQty";
             obtPdtQty.Size = new System.Drawing.Size(369, 31);
             obtPdtQty.TabIndex = 2;
             // 
             // obtPdtPri
             // 
-            obtPdtPri.Location = new System.Drawing.Point(155, 133);
+            obtPdtPri.Location = new System.Drawing.Point(155, 181);
             obtPdtPri.Name = "obtPdtPri";
             obtPdtPri.Size = new System.Drawing.Size(369, 31);
             obtPdtPri.TabIndex = 3;
@@ -71,42 +75,42 @@
             // olaPdtCode
             // 
             olaPdtCode.AutoSize = true;
-            olaPdtCode.Location = new System.Drawing.Point(38, 21);
+            olaPdtCode.Location = new System.Drawing.Point(54, 27);
             olaPdtCode.Name = "olaPdtCode";
-            olaPdtCode.Size = new System.Drawing.Size(80, 25);
+            olaPdtCode.Size = new System.Drawing.Size(92, 25);
             olaPdtCode.TabIndex = 5;
-            olaPdtCode.Text = "รหัสสินค้า";
+            olaPdtCode.Text = "รหัสสินค้า:*";
             // 
             // olaPdtName
             // 
             olaPdtName.AutoSize = true;
-            olaPdtName.Location = new System.Drawing.Point(43, 61);
+            olaPdtName.Location = new System.Drawing.Point(62, 79);
             olaPdtName.Name = "olaPdtName";
-            olaPdtName.Size = new System.Drawing.Size(72, 25);
+            olaPdtName.Size = new System.Drawing.Size(84, 25);
             olaPdtName.TabIndex = 6;
-            olaPdtName.Text = "ชื่อสินค้า";
+            olaPdtName.Text = "ชื่อสินค้า:*";
             // 
             // olaPdtQty
             // 
             olaPdtQty.AutoSize = true;
-            olaPdtQty.Location = new System.Drawing.Point(46, 91);
+            olaPdtQty.Location = new System.Drawing.Point(75, 130);
             olaPdtQty.Name = "olaPdtQty";
-            olaPdtQty.Size = new System.Drawing.Size(59, 25);
+            olaPdtQty.Size = new System.Drawing.Size(71, 25);
             olaPdtQty.TabIndex = 7;
-            olaPdtQty.Text = "จำนวน";
+            olaPdtQty.Text = "จำนวน:*";
             // 
             // olaPdtPri
             // 
             olaPdtPri.AutoSize = true;
-            olaPdtPri.Location = new System.Drawing.Point(48, 131);
+            olaPdtPri.Location = new System.Drawing.Point(88, 183);
             olaPdtPri.Name = "olaPdtPri";
-            olaPdtPri.Size = new System.Drawing.Size(46, 25);
+            olaPdtPri.Size = new System.Drawing.Size(58, 25);
             olaPdtPri.TabIndex = 8;
-            olaPdtPri.Text = "ราคา";
+            olaPdtPri.Text = "ราคา:*";
             // 
             // ocmSavePdt
             // 
-            ocmSavePdt.Location = new System.Drawing.Point(180, 192);
+            ocmSavePdt.Location = new System.Drawing.Point(180, 248);
             ocmSavePdt.Name = "ocmSavePdt";
             ocmSavePdt.Size = new System.Drawing.Size(112, 34);
             ocmSavePdt.TabIndex = 9;
@@ -116,18 +120,31 @@
             // 
             // ocmResetPdt
             // 
-            ocmResetPdt.Location = new System.Drawing.Point(348, 192);
+            ocmResetPdt.Location = new System.Drawing.Point(348, 248);
             ocmResetPdt.Name = "ocmResetPdt";
             ocmResetPdt.Size = new System.Drawing.Size(112, 34);
             ocmResetPdt.TabIndex = 10;
             ocmResetPdt.Text = "รีเซ็ต";
             ocmResetPdt.UseVisualStyleBackColor = true;
+            ocmResetPdt.Click += ocmResetPdt_Click;
+            // 
+            // opbImgPdt
+            // 
+            opbImgPdt.Image = Properties.Resources.ImageDefault;
+            opbImgPdt.Location = new System.Drawing.Point(569, 24);
+            opbImgPdt.Name = "opbImgPdt";
+            opbImgPdt.Size = new System.Drawing.Size(197, 202);
+            opbImgPdt.SizeMode = PictureBoxSizeMode.CenterImage;
+            opbImgPdt.TabIndex = 11;
+            opbImgPdt.TabStop = false;
+            opbImgPdt.Click += opbImgPdt_Click;
             // 
             // wAddProduct
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(578, 251);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(790, 312);
+            Controls.Add(opbImgPdt);
             Controls.Add(ocmResetPdt);
             Controls.Add(ocmSavePdt);
             Controls.Add(olaPdtPri);
@@ -140,6 +157,7 @@
             Controls.Add(obtPdtCode);
             Name = "wAddProduct";
             Text = "wAddProduct";
+            ((System.ComponentModel.ISupportInitialize)opbImgPdt).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -156,5 +174,6 @@
         private System.Windows.Forms.Label olaPdtPri;
         private System.Windows.Forms.Button ocmSavePdt;
         private System.Windows.Forms.Button ocmResetPdt;
+        private System.Windows.Forms.PictureBox opbImgPdt;
     }
 }

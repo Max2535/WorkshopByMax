@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WorkShopWebService.Models.WebService.Response.Base
+namespace BuildingBlocks.Models.WebService.Response.Base
 {
     /// <summary>
     /// Response an Object

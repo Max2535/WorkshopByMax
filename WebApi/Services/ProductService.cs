@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.Class;
-using WorkShopWebService.Models.WebService.Request.ShopOnline;
-using WorkShopWebService.Models.WebService.Response.ShopOnline;
+using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using BuildingBlocks.Models.WebService.Response.ShopOnline;
 
 namespace WebApi.Services
 {
-    public class ProductService : IProductService
+    public class cProductService : IcProductService
     {
         private readonly cDbContext _context;
 
-        public ProductService(cDbContext context)
+        public cProductService(cDbContext context)
         {
             _context = context;
         }
 
-        public bool addProduct(cmlDataProduct oShopOnline)
+        public bool C_ADDbProduct(cmlDataProduct oShopOnline)
         {
             throw new System.NotImplementedException();
         }
 
-        public List<cmlResProduct> getProduct()
+        public List<cmlResProduct> C_GETaoProduct()
         {
             try
             {

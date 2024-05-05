@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WorkShopWebService.Models.Setting;
+using BuildingBlocks.Models.Setting;
 
-namespace WorkShopWebService.Class
+namespace BuildingBlocks.Class
 {
     public static class cVB
     {

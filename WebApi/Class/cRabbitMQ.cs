@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkShopWebService.Class
+namespace BuildingBlocks.Class
 {
     public class cRabbitMQ
     {
@@ -17,7 +17,7 @@ namespace WorkShopWebService.Class
         /// <param name="ptQueue">Queue Name</param>
         /// <param name="pbDurable">อยู่ที่ Queue ที่จะส่งไป Set Durable หรือไม่ </param>
         /// <returns></returns>
-        public bool C_PRCbSendData2Srv(string ptMsg, bool pbDurable = false)
+        public bool C_PRCbSendData2Srv(string ptMsg,string ptQueue, bool pbDurable = false)
         {
             try
             {
@@ -30,9 +30,9 @@ namespace WorkShopWebService.Class
                 {
                     using (IModel oChannel = oConn.CreateModel())
                     {
-                        oChannel.QueueDeclare(cVB.oVB_MQSettings.tQueue, durable: pbDurable, false, false, null);
+                        oChannel.QueueDeclare(ptQueue, durable: pbDurable, false, false, null);
                         var oBody = Encoding.UTF8.GetBytes(ptMsg);
-                        oChannel.BasicPublish("", cVB.oVB_MQSettings.tQueue, false, null, oBody);
+                        oChannel.BasicPublish("", ptQueue, false, null, oBody);
                     }
                 }
                 return true;

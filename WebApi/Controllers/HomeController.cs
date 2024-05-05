@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text;
 
-namespace WorkShopWebService.Controllers
+namespace BuildingBlocks.Controllers
 {
     public class HomeController : Controller
     {
