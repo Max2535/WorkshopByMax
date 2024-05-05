@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using ConApp.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +9,14 @@ using WorkShopRabbitMQ.Models.Receive;
 
 namespace WorkShopRabbitMQ.Class
 {
-    public class cExample
+    public class cService
     {
-        public bool C_PRCbExample(cmlRcvData poData, out string ptMsgErr)
+        public bool C_PRCbService(cmlDataProduct poData, out string ptMsgErr, cDbContext context)
         {
             try
             {
                 //To do process 
-                Console.WriteLine(poData.ptData);
+                Console.WriteLine(poData.ptName);
 
                 ptMsgErr = "";
                 return true;
@@ -30,7 +32,7 @@ namespace WorkShopRabbitMQ.Class
             }
         }
 
-        public bool C_PRCbExamplePublish2Queue(cmlRcvData poData, out string ptMsgErr)
+        public bool C_PRCbServicePublish2Queue(cmlRcvData poData, out string ptMsgErr)
         {
             try
             {
@@ -63,7 +65,7 @@ namespace WorkShopRabbitMQ.Class
             }
         }
 
-        public bool C_PRCbExamplePublish2Exchange(cmlRcvData poData, out string ptMsgErr)
+        public bool C_PRCbServicePublish2Exchange(cmlRcvData poData, out string ptMsgErr)
         {
             try
             {

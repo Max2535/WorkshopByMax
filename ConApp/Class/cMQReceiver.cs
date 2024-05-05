@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using ConApp.Class;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -23,18 +24,16 @@ namespace WorkShopRabbitMQ.Class
             }
             catch (Exception)
             {
-
             }
             finally
             {
-
             }
         }
 
         /// <summary>
         /// Process receive message RabbitMQ.
         /// </summary>
-        public void C_MQRxProcess()
+        public void C_MQRxProcess(cDbContext context)
         {
             ConnectionFactory oFactory;
             ThreadStart oStart;
@@ -50,7 +49,7 @@ namespace WorkShopRabbitMQ.Class
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
-                if (true)//Test
+                if (context!=null)
                 {
                     Console.WriteLine("========================================================================");
                     Console.WriteLine("Host name:       {0}", cVB.oVB_MQSetting.tMQHostName);
@@ -79,7 +78,7 @@ namespace WorkShopRabbitMQ.Class
 
                     foreach (string tQueue in atQueue)
                     {
-                        if (string.Equals(tQueue, ""))
+                        if (string.IsNullOrEmpty(tQueue))
                         {
                             continue;
                         }
@@ -87,7 +86,7 @@ namespace WorkShopRabbitMQ.Class
                         oConn = oFactory.CreateConnection();
                         oChannel = oConn.CreateModel();
 
-                        oStart = () => C_PRCxMessage(oChannel, tQueue);
+                        oStart = () => C_PRCxMessage(oChannel, tQueue,context);
                         oTherad = new Thread(oStart);
                         oTherad.Name = tQueue;
                         oTherad.IsBackground = true;
@@ -133,7 +132,6 @@ namespace WorkShopRabbitMQ.Class
                 }
                 else
                 {
-                    Console.WriteLine(tMsgErr);
                     Task.Delay(10000).Wait();
                 }
             }
@@ -158,7 +156,7 @@ namespace WorkShopRabbitMQ.Class
         /// </summary>
         /// <param name="poChannel">Channel.</param>
         /// <param name="ptQueue">Queue name.</param>
-        private void C_PRCxMessage(IModel poChannel, string ptQueue)
+        private void C_PRCxMessage(IModel poChannel, string ptQueue, cDbContext context)
         {
             EventingBasicConsumer oConsumer;
             string tMessage = "";
@@ -176,29 +174,6 @@ namespace WorkShopRabbitMQ.Class
                 {
                     try
                     {
-                        switch (ptQueue)
-                        {
-                            case "QueueName1":
-                            case "QueueName2":
-                                //Declare Exchange
-                                string tExchangeName = "ExchangeName1";
-                                poChannel.ExchangeDeclare(exchange: tExchangeName, type: "fanout");
-
-                                //Declare Queue
-                                poChannel.QueueDeclare(queue: ptQueue, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-                                //Binding Queue to Exchange
-                                poChannel.QueueBind(ptQueue, tExchangeName, "", null);
-
-                                break;
-
-                            default:
-                                //Declare Queue
-                                poChannel.QueueDeclare(queue: ptQueue, durable: true, exclusive: false, autoDelete: false, arguments: null);
-                                break;
-                        }
-
-
                         oConsumer = new EventingBasicConsumer(poChannel);
                         oConsumer.Received += (oModel, oEevntArgs) =>
                         {
@@ -208,74 +183,16 @@ namespace WorkShopRabbitMQ.Class
                             
                             switch (ptQueue)
                             {
-                                case "QExample":
-                                    try
-                                    {
-                                        Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
-                                        //Process 
-                                        cmlRcvData oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlRcvData>(tMessage);
-
-                                        cExample oExample = new cExample();
-
-                                        bPrc = oExample.C_PRCbExample(oRcvData, out tMsgErr);
-
-                                        if (bPrc)
-                                        {
-                                            //delete this message queue
-                                            poChannel.BasicAck(oEevntArgs.DeliveryTag, false);
-                                        }
-                                        else
-                                        {
-                                            
-                                        }
-                                    }
-                                    catch (Exception oEx)
-                                    {
-                                        
-                                    }
-                                    Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
-                                    Thread.Sleep(500);
-                                    break;
-
                                 case "MaxQueueAddPdt":
                                     try
                                     {
                                         Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
                                         //Process 
-                                        cmlRcvData oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlRcvData>(tMessage);
+                                        cmlDataProduct oRcvPdt = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlDataProduct>(tMessage);
 
-                                        cExample oExample = new cExample();
+                                        cService oService = new cService();
 
-                                        bPrc = oExample.C_PRCbExample(oRcvData, out tMsgErr);
-
-                                        if (bPrc)
-                                        {
-                                            //delete this message queue
-                                            poChannel.BasicAck(oEevntArgs.DeliveryTag, false);
-                                        }
-                                        else
-                                        {
-
-                                        }
-                                    }
-                                    catch (Exception oEx)
-                                    {
-
-                                    }
-                                    Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
-                                    Thread.Sleep(500);
-                                    break;
-
-                                case "QExample_Publish2Exchange":
-                                    try
-                                    {
-                                        Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
-                                        //Process 
-                                        cmlRcvData oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlRcvData>(tMessage);
-
-                                        cExample oExample = new cExample();
-
-                                        bPrc = oExample.C_PRCbExamplePublish2Exchange(oRcvData, out tMsgErr);
+                                        bPrc = oService.C_PRCbService(oRcvPdt, out tMsgErr, context);
 
                                         if (bPrc)
                                         {
@@ -293,36 +210,6 @@ namespace WorkShopRabbitMQ.Class
                                     }
                                     Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
                                     Thread.Sleep(500);
-                                    break;
-
-                                case "QExample_Publish2Queue":
-                                    try
-                                    {
-                                        Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
-                                        //Process 
-                                        cmlRcvData oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlRcvData>(tMessage);
-
-                                        cExample oExample = new cExample();
-
-                                        bPrc = oExample.C_PRCbExamplePublish2Queue(oRcvData, out tMsgErr);
-
-                                        if (bPrc)
-                                        {
-                                            //delete this message queue
-                                            poChannel.BasicAck(oEevntArgs.DeliveryTag, false);
-                                        }
-                                        else
-                                        {
-
-                                        }
-                                    }
-                                    catch (Exception oEx)
-                                    {
-
-                                    }
-                                    Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
-                                    Thread.Sleep(500);
-                                    
                                     break;
 
                                 default:
@@ -334,8 +221,6 @@ namespace WorkShopRabbitMQ.Class
 
                         bStaConsume = true;
                         Thread.Sleep(500);
-
-
                     }
                     catch (RabbitMQ.Client.Exceptions.RabbitMQClientException oRMQExn)
                     {

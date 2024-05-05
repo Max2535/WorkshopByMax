@@ -1,14 +1,9 @@
 ﻿using ConApp.Class;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkShopRabbitMQ.Class;
@@ -30,16 +25,9 @@ namespace ConApp
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            //Insert Code
-            //var config = await _context.TSOLSConfigs.ToListAsync();
-            //var cof = _configuration.GetSection("RabbitMQSettings");
-
             cVB.oVB_MQSetting = new cmlRabbitMQSetting();
             _host.Configuration.GetSection("RabbitMQSettings").Bind(cVB.oVB_MQSetting);
-            new cMQReceiver().C_MQRxProcess();
-
-
-
+            new cMQReceiver().C_MQRxProcess(_context);
         }
     }
 }
