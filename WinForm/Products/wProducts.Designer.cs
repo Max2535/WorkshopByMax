@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new System.Windows.Forms.DataGridView();
+            ogbOrd = new System.Windows.Forms.DataGridView();
             olaPdtCode = new System.Windows.Forms.Label();
             obtPdtCode = new System.Windows.Forms.TextBox();
-            ocmSavePdt = new System.Windows.Forms.Button();
+            ocmSearchPdt = new System.Windows.Forms.Button();
             ocmResetPdt = new System.Windows.Forms.Button();
             pcloader = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ogbOrd).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcloader).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // ogbOrd
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new System.Drawing.Point(12, 98);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 28;
-            dataGridView1.Size = new System.Drawing.Size(776, 340);
-            dataGridView1.TabIndex = 0;
+            ogbOrd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ogbOrd.Location = new System.Drawing.Point(12, 98);
+            ogbOrd.Name = "ogbOrd";
+            ogbOrd.RowHeadersWidth = 62;
+            ogbOrd.RowTemplate.Height = 28;
+            ogbOrd.Size = new System.Drawing.Size(776, 340);
+            ogbOrd.TabIndex = 0;
             // 
             // olaPdtCode
             // 
@@ -64,14 +64,15 @@
             obtPdtCode.Size = new System.Drawing.Size(354, 31);
             obtPdtCode.TabIndex = 2;
             // 
-            // ocmSavePdt
+            // ocmSearchPdt
             // 
-            ocmSavePdt.Location = new System.Drawing.Point(485, 28);
-            ocmSavePdt.Name = "ocmSavePdt";
-            ocmSavePdt.Size = new System.Drawing.Size(112, 34);
-            ocmSavePdt.TabIndex = 3;
-            ocmSavePdt.Text = "ค้นหา";
-            ocmSavePdt.UseVisualStyleBackColor = true;
+            ocmSearchPdt.Location = new System.Drawing.Point(485, 28);
+            ocmSearchPdt.Name = "ocmSearchPdt";
+            ocmSearchPdt.Size = new System.Drawing.Size(112, 34);
+            ocmSearchPdt.TabIndex = 3;
+            ocmSearchPdt.Text = "ค้นหา";
+            ocmSearchPdt.UseVisualStyleBackColor = true;
+            ocmSearchPdt.Click += ocmSearchPdt_Click;
             // 
             // ocmResetPdt
             // 
@@ -81,15 +82,15 @@
             ocmResetPdt.TabIndex = 4;
             ocmResetPdt.Text = "เพิ่มสินค้า";
             ocmResetPdt.UseVisualStyleBackColor = true;
-            ocmResetPdt.Click += ocmResetPdt_Click;
+            ocmResetPdt.Click += ocmAddPdt_Click;
             // 
             // pcloader
             // 
             pcloader.Image = Properties.Resources.Loading;
-            pcloader.Location = new System.Drawing.Point(122, 210);
+            pcloader.Location = new System.Drawing.Point(721, 333);
             pcloader.Name = "pcloader";
             pcloader.Size = new System.Drawing.Size(475, 480);
-            pcloader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            pcloader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             pcloader.TabIndex = 5;
             pcloader.TabStop = false;
             pcloader.Visible = false;
@@ -101,13 +102,13 @@
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(pcloader);
             Controls.Add(ocmResetPdt);
-            Controls.Add(ocmSavePdt);
+            Controls.Add(ocmSearchPdt);
             Controls.Add(obtPdtCode);
             Controls.Add(olaPdtCode);
-            Controls.Add(dataGridView1);
+            Controls.Add(ogbOrd);
             Name = "wProducts";
             Text = "รายการสินค้า";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ogbOrd).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcloader).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -115,10 +116,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ogbOrd;
         private System.Windows.Forms.Label olaPdtCode;
         private System.Windows.Forms.TextBox obtPdtCode;
-        private System.Windows.Forms.Button ocmSavePdt;
+        private System.Windows.Forms.Button ocmSearchPdt;
         private System.Windows.Forms.Button ocmResetPdt;
         private System.Windows.Forms.PictureBox pcloader;
     }

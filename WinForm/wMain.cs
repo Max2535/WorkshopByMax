@@ -9,13 +9,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinForm.Stock;
 using static System.Windows.Forms.DataFormats;
 
 namespace WinForm
 {
     public partial class wMain : Form
     {
-        public static bool isLoad=true;
+        public static bool isLoad = true;
         public wMain()
         {
             InitializeComponent();
@@ -23,20 +24,26 @@ namespace WinForm
 
         private void ocmProducts_Click(object sender, EventArgs e)
         {
-            wProducts wPdt = new wProducts();
-            wPdt.Show();
+            wProducts oPdt = new wProducts();
+            oPdt.Show();
         }
 
         private void ocmSelling_Click(object sender, EventArgs e)
         {
-            wSelling wSell = new wSelling();
-            wSell.Show();
+            wSelling oSell = new wSelling();
+            oSell.Show();
         }
 
         private void ocmOrders_Click(object sender, EventArgs e)
         {
-            wOrders wOrd = new wOrders();
-            wOrd.Show();
+            wOrders oOrd = new wOrders();
+            oOrd.Show();
+        }
+
+        private void ocmSearchOrdNo_Click(object sender, EventArgs e)
+        {
+            wStock oStock = new wStock();
+            oStock.Show();
         }
     }
 }

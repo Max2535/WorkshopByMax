@@ -40,9 +40,7 @@ namespace WorkShopRabbitMQ.Class
             Thread oTherad;
             IConnection oConn;
             IModel oChannel;
-            //cMS oMsg;
             List<string> atQueue;
-            string tMsgErr;
 
             try
             {
@@ -156,7 +154,7 @@ namespace WorkShopRabbitMQ.Class
         /// </summary>
         /// <param name="poChannel">Channel.</param>
         /// <param name="ptQueue">Queue name.</param>
-        private void C_PRCxMessage(IModel poChannel, string ptQueue, cDbContext context)
+        public static void C_PRCxMessage(IModel poChannel, string ptQueue, cDbContext context)
         {
             EventingBasicConsumer oConsumer;
             string tMessage = "";
@@ -201,12 +199,12 @@ namespace WorkShopRabbitMQ.Class
                                         }
                                         else
                                         {
-
+                                            //error
+                                            poChannel.BasicNack(oEevntArgs.DeliveryTag, false,true);
                                         }
                                     }
                                     catch (Exception oEx)
                                     {
-
                                     }
                                     Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
                                     Thread.Sleep(500);

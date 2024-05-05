@@ -9,6 +9,6 @@ namespace ConApp.Models
     {
         public string FTCnfCode { get; set; }
         public string FTCnfName { get; set; }
-        public int FNCnfType { get; set; }
+        public int? FNCnfType { get; set; }
     }
 }

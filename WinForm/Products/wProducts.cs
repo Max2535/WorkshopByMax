@@ -30,23 +30,28 @@ namespace WinForm
             //{
             //    var data = context.TSOLMProducts.ToList();
 
-            //    dataGridView1.DataSource = data;
+            //    ogbOrd.DataSource = data;
 
-            //    dataGridView1.Columns[0].HeaderText = "รหัสสินค้า";
+            //    ogbOrd.Columns[0].HeaderText = "รหัสสินค้า";
             //    pcloader.Visible = false;
             //}
 
             var data = cProductService.C_GETaoProduct();
-            dataGridView1.DataSource = data;
+            ogbOrd.DataSource = data;
 
-            dataGridView1.Columns[0].HeaderText = "รหัสสินค้า";
+            ogbOrd.Columns[0].HeaderText = "รหัสสินค้า";
 
         }
 
-        private void ocmResetPdt_Click(object sender, EventArgs e)
+        private void ocmAddPdt_Click(object sender, EventArgs e)
         {
             wAddProduct wAddPdt = new wAddProduct();
             wAddPdt.Show();
+        }
+
+        private void ocmSearchPdt_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

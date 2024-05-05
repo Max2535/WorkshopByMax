@@ -89,7 +89,7 @@ namespace BuildingBlocks.Controllers
         }
 
         [HttpGet]
-        [Route("C_GETaoProduct")]
+        [Route("GetProduct")]
         public cmlResList<cmlResProduct> GET_EXPoShopOnlineResObject()
         {
             cmlResList<cmlResProduct> oResult;

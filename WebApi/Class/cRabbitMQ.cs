@@ -37,7 +37,7 @@ namespace BuildingBlocks.Class
                 }
                 return true;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 return false;
             }

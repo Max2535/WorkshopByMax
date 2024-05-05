@@ -17,7 +17,6 @@ namespace WorkShopRabbitMQ.Class
             {
                 //To do process 
                 Console.WriteLine(poData.ptName);
-
                 ptMsgErr = "";
                 return true;
             }

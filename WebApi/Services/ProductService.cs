@@ -9,11 +9,11 @@ namespace WebApi.Services
 {
     public class cProductService : IcProductService
     {
-        private readonly cDbContext _context;
+        private readonly cDbContext oContext;
 
         public cProductService(cDbContext context)
         {
-            _context = context;
+            oContext = context;
         }
 
         public bool C_ADDbProduct(cmlDataProduct oShopOnline)
@@ -26,7 +26,7 @@ namespace WebApi.Services
             try
             {
                 List<cmlResProduct> aoProduct = new List<cmlResProduct>();
-                var cmlPdt = _context.TSOLMProducts.ToList();
+                var cmlPdt = oContext.TSOLMProducts.ToList();
                 foreach (var pdt in cmlPdt)
                 {
                     aoProduct.Add(new cmlResProduct
