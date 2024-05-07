@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApiSTD.Models.WebService.Request.Example
+namespace BuildingBlocks.Models.Receive
 {
-    public class cmlReqExample
+    public class cmlRcvData
     {
         public string ptData { get; set; }
     }

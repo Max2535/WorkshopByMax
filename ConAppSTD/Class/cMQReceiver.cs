@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ConAppSTD.Models.Receive;
+using BuildingBlocks.Models.WebService.Request.ShopOnline;
 
 namespace ConAppSTD.Class
 {
@@ -300,11 +301,11 @@ namespace ConAppSTD.Class
                                     {
                                         Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
                                         //Process 
-                                        cmlRcvData oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlRcvData>(tMessage);
+                                        cmlDataProduct oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlDataProduct>(tMessage);
 
                                         cExample oExample = new cExample();
-
-                                        bPrc = oExample.C_PRCbExample(oRcvData, out tMsgErr);
+                                        string tMsgErr = "";
+                                        bPrc = cExample.C_PRCxAddPdtTransaction(oRcvData);
 
                                         if (bPrc)
                                         {

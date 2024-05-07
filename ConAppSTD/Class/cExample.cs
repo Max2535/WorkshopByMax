@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BuildingBlocks.Class;
 using BuildingBlocks.Models.WebService.Request.ShopOnline;
 using ConAppSTD.Models.Receive;
 
@@ -49,6 +50,44 @@ namespace ConAppSTD.Class
             {
                 poData = null;
             }
+        }
+
+        public static bool C_PRCxAddPdtTransaction(cmlDataProduct poPdt)
+        {
+            cDatabase oDB = new cDatabase();
+            StringBuilder oSql = new StringBuilder();
+            try
+            {
+                oSql.AppendLine("BEGIN TRY");
+                oSql.AppendLine("    BEGIN TRAN");
+
+                oSql.AppendLine("    INSERT INTO [dbo].[TSOLMProduct] ([FTPdtCode], [FTPdtName], [FNPdtQty], [FNPdtCnfVat], [FCPdtPri], [FBPdtAct])");
+                oSql.AppendLine($"    VALUES (N'{poPdt.ptCode}', N'{poPdt.ptName}', {poPdt.pnQty}, 1, {poPdt.pnPri}, '1');");
+
+                oSql.AppendLine("    COMMIT TRAN");
+                oSql.AppendLine("    SELECT 1"); 
+                oSql.AppendLine("END TRY");
+                oSql.AppendLine("BEGIN CATCH");
+                oSql.AppendLine("    ROLLBACK TRAN");
+                oSql.AppendLine("    SELECT 0"); 
+                oSql.AppendLine("END CATCH"); 
+                if (oDB.C_GEToDataQuery<int>(oSql.ToString()) == 0)
+                {
+                    Console.WriteLine($"C_PRCxTemp2Transaction : Cannot Move Temp 2 Transaction !!!!");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception oEx)
+            {
+                Console.WriteLine(oEx.Message);
+            }
+            finally
+            {
+                oDB = null;
+                oSql = null;
+            }
+            return false;
         }
 
         public bool C_PRCbExamplePublish2Queue(cmlRcvData poData, out string ptMsgErr)

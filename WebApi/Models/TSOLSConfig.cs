@@ -9,6 +9,7 @@ namespace WebApi.Models
     {
         public string FTCnfCode { get; set; }
         public string FTCnfName { get; set; }
-        public int FNCnfType { get; set; }
+        public string FTCnfValue { get; set; }
+        public int? FNCnfType { get; set; }
     }
 }

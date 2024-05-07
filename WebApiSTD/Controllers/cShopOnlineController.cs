@@ -1,11 +1,13 @@
-﻿using BuildingBlocks.Models.WebService.Request.ShopOnline;
+﻿using BuildingBlocks.Class;
+using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using BuildingBlocks.Models.WebService.Response.Base;
 using BuildingBlocks.Models.WebService.Response.ShopOnline;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using WebApiSTD.Class;
-using WebApiSTD.Models.WebService.Response.Base;
 
 namespace WebApiSTD.Controllers
 {
@@ -103,7 +105,23 @@ namespace WebApiSTD.Controllers
                     //TODO::
                 }
                 //process..
-                //oResult.raItems = oProduct.C_GETaoProduct(tSearchPdtCode);
+                cDatabase oDatabase = new cDatabase();
+                
+                StringBuilder oSql;
+                oSql = new StringBuilder();
+                oSql.AppendLine("SELECT " +
+                    "FTPdtCode AS rtCode," +
+                    "FTPdtName AS rtName," +
+                    "FNPdtQty AS rnQty," +
+                    "FCPdtPri AS rcPri");
+                oSql.AppendLine("FROM TSOLMProduct");
+                if (!string.IsNullOrEmpty(tSearchPdtCode))
+                {
+                    //TODO::Sql parameter
+                    oSql.AppendLine($"WHERE FTPdtCode={tSearchPdtCode}");
+                }
+                List<cmlResProduct> oResultPdt = oDatabase.C_GETaDataQuery<cmlResProduct>(oSql.ToString());
+                oResult.raItems = oResultPdt;
                 oResult.rtCode = cMS.tMS_RespCode001;
                 oResult.rtDesc = cMS.tMS_RespDesc001;
                 return oResult;
