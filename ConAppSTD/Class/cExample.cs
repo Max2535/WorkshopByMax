@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BuildingBlocks.Class;
 using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using BuildingBlocks.Models.WebService.Response.ShopOnline;
 using ConAppSTD.Models.Receive;
 
 namespace ConAppSTD.Class
@@ -57,7 +58,7 @@ namespace ConAppSTD.Class
             cDatabase oDB = new cDatabase();
             StringBuilder oSql = new StringBuilder();
             try
-            {
+            {                
                 oSql.AppendLine("BEGIN TRY");
                 oSql.AppendLine("    BEGIN TRAN");
 
@@ -73,7 +74,83 @@ namespace ConAppSTD.Class
                 oSql.AppendLine("END CATCH"); 
                 if (oDB.C_GEToDataQuery<int>(oSql.ToString()) == 0)
                 {
-                    Console.WriteLine($"C_PRCxTemp2Transaction : Cannot Move Temp 2 Transaction !!!!");
+                    Console.WriteLine($"Transaction Error Add Product !!!");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception oEx)
+            {
+                Console.WriteLine(oEx.Message);
+            }
+            finally
+            {
+                oDB = null;
+                oSql = null;
+            }
+            return false;
+        }
+
+        public static bool C_PRCxUpdPdtTransaction(cmlDataProduct poPdt)
+        {
+            cDatabase oDB = new cDatabase();
+            StringBuilder oSql = new StringBuilder();
+            try
+            {
+                oSql.AppendLine("BEGIN TRY");
+                oSql.AppendLine("    BEGIN TRAN");
+
+                oSql.AppendLine($"    UPDATE TSOLMProduct SET [FTPdtName] = N'{poPdt.ptName}', [FNPdtQty] = {poPdt.pnQty}, [FCPdtPri] = {poPdt.pnPri}");
+                oSql.AppendLine($"    WHERE FTPdtCode = N'{poPdt.ptCode}';");
+
+                oSql.AppendLine("    COMMIT TRAN");
+                oSql.AppendLine("    SELECT 1");
+                oSql.AppendLine("END TRY");
+                oSql.AppendLine("BEGIN CATCH");
+                oSql.AppendLine("    ROLLBACK TRAN");
+                oSql.AppendLine("    SELECT 0");
+                oSql.AppendLine("END CATCH");
+                if (oDB.C_GEToDataQuery<int>(oSql.ToString()) == 0)
+                {
+                    Console.WriteLine($"Transaction Error Update Product !!!");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception oEx)
+            {
+                Console.WriteLine(oEx.Message);
+            }
+            finally
+            {
+                oDB = null;
+                oSql = null;
+            }
+            return false;
+        }
+
+        public static bool C_PRCxDelPdtTransaction(string ptPdtCode)
+        {
+            cDatabase oDB = new cDatabase();
+            StringBuilder oSql = new StringBuilder();
+            try
+            {
+                oSql.AppendLine("BEGIN TRY");
+                oSql.AppendLine("    BEGIN TRAN");
+
+                oSql.AppendLine($"    DELETE FROM TSOLMProduct");
+                oSql.AppendLine($"    WHERE FTPdtCode = N'{ptPdtCode}';");
+
+                oSql.AppendLine("    COMMIT TRAN");
+                oSql.AppendLine("    SELECT 1");
+                oSql.AppendLine("END TRY");
+                oSql.AppendLine("BEGIN CATCH");
+                oSql.AppendLine("    ROLLBACK TRAN");
+                oSql.AppendLine("    SELECT 0");
+                oSql.AppendLine("END CATCH");
+                if (oDB.C_GEToDataQuery<int>(oSql.ToString()) == 0)
+                {
+                    Console.WriteLine($"Transaction Error Delete !!!");
                     return false;
                 }
                 return true;
@@ -155,6 +232,61 @@ namespace ConAppSTD.Class
             {
                 poData = null;
             }
+        }
+
+        public bool C_PRCxChackOutTransaction(List<cmlDataCheckOut> paoCart)
+        {
+            cDatabase oDB = new cDatabase();
+            StringBuilder oSql = new StringBuilder();
+            try
+            {
+                oSql.Clear();
+                oSql.AppendLine(@"SELECT TOP
+	                                    1 MAX(FTOrdCode) AS nMaxOrd
+                                    FROM
+	                                    ( SELECT CAST ( FTOrdCode AS INT ) AS FTOrdCode FROM TSOLTOrder )
+                                    AS nMax");
+                var oMaxOrd = oDB.C_GETaDataQuery<cmlDataCheckOut>(oSql.ToString());
+                String tOrdCode = "".PadLeft(3, '0') + (oMaxOrd[0].nMaxOrd+1);
+                oSql.Clear();
+                oSql.AppendLine("BEGIN TRY");
+                oSql.AppendLine("    BEGIN TRAN");
+                //รายการสินค้า
+                foreach (var oCart in paoCart)
+                {
+                    oSql.AppendLine("    INSERT INTO TSOLTOrderDetails " +
+                        "                   ([FTOrdCode], [FTPdtCode], [FNOrdDtQty], [FCOrdDtPri])");
+                    oSql.AppendLine($"   VALUES (N'{tOrdCode}', N'{oCart.ptCode}', {oCart.pnQty}, {oCart.pnPri});");
+                }
+                //ใบสั่งซื้อ
+                oSql.AppendLine("    INSERT INTO TSOLTOrder ([FTOrdCode], [FTOrdCusName], [FDOrdDate], [FCOrdAmt])");
+                oSql.AppendLine($"        VALUES ('{tOrdCode}', 'test test {tOrdCode}', GETDATE(), {paoCart.Sum(s=>s.pnPri)});");
+
+
+                oSql.AppendLine("    COMMIT TRAN");
+                oSql.AppendLine("    SELECT 1");
+                oSql.AppendLine("END TRY");
+                oSql.AppendLine("BEGIN CATCH");
+                oSql.AppendLine("    ROLLBACK TRAN");
+                oSql.AppendLine("    SELECT 0");
+                oSql.AppendLine("END CATCH");
+                if (oDB.C_GEToDataQuery<int>(oSql.ToString()) == 0)
+                {
+                    Console.WriteLine($"Transaction Error Add CheckOut !!!");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception oEx)
+            {
+                Console.WriteLine(oEx.Message);
+            }
+            finally
+            {
+                oDB = null;
+                oSql = null;
+            }
+            return false;
         }
     }
 }

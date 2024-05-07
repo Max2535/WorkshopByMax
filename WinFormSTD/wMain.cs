@@ -21,10 +21,10 @@ namespace WinFormSTD
         {
             InitializeComponent();
             // Set the form style to None (removes border)
-            FormBorderStyle = FormBorderStyle.None;
+            //FormBorderStyle = FormBorderStyle.None;
 
             // Maximize the form
-            WindowState = FormWindowState.Maximized;
+            //WindowState = FormWindowState.Maximized;
         }
 
         private void ocmProducts_Click(object sender, EventArgs e)

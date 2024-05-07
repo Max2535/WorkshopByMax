@@ -1,4 +1,9 @@
-﻿namespace WinFormSTD
+﻿using System;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Windows.Forms;
+
+namespace WinFormSTD
 {
     partial class wProducts
     {
@@ -49,6 +54,7 @@
             ogbPdt.RowHeadersWidth = 62;
             ogbPdt.RowTemplate.Height = 28;
             ogbPdt.Size = new System.Drawing.Size(816, 349);
+            //ogbPdt.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.ogdHeader_CellPainting);
             ogbPdt.TabIndex = 0;
             // 
             // olaPdtCode
@@ -126,6 +132,51 @@
             ((System.ComponentModel.ISupportInitialize)pcloader).EndInit();
             ResumeLayout(false);
             PerformLayout();
+        }
+        private bool isMergingHeaders = false;
+        private int firstClickedColumnIndex = -1;
+        private void ogdHeader_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex >= 0)
+            {
+                if (!isMergingHeaders)
+                {
+                    isMergingHeaders = true;
+                    firstClickedColumnIndex = e.ColumnIndex;
+                }
+                else
+                {
+                    // Merge columns if another header is clicked while merging
+                    MergeColumnHeaders(firstClickedColumnIndex, e.ColumnIndex);
+                    isMergingHeaders = false;
+                    firstClickedColumnIndex = -1;
+                }
+                ogbPdt.Invalidate(); // Trigger redrawing
+            }
+        }
+
+        private void MergeColumnHeaders(int colIndex1, int colIndex2)
+        {
+            // Ensure columns are valid and in the correct order
+            if (colIndex1 < 0 || colIndex1 >= ogbPdt.ColumnCount ||
+                colIndex2 < 0 || colIndex2 >= ogbPdt.ColumnCount ||
+                colIndex1 > colIndex2)
+            {
+                return;
+            }
+
+            // Get the columns to be merged
+            DataGridViewColumn col1 = ogbPdt.Columns[colIndex1];
+            DataGridViewColumn col2 = ogbPdt.Columns[colIndex2];
+
+            // Set the merged header text (combine column names)
+            col1.HeaderText = col1.HeaderText + " - " + col2.HeaderText;
+
+            // Adjust the width of the first column to span both
+            col1.Width = col1.Width + col2.Width;
+
+            // Hide the second column (visually merged)
+            col2.Visible = false;
         }
 
         #endregion

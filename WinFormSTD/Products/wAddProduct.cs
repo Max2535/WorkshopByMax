@@ -14,10 +14,24 @@ namespace WinFormSTD.Products
 {
     public partial class wAddProduct : Form
     {
-        public string ptPdtCode { get; set; }
-        public wAddProduct()
+        private bool bModeEdit = false;
+        public wAddProduct(string ptPdtCode="")
         {
             InitializeComponent();
+            obtPdtCode.Text = ptPdtCode;
+            if (!string.IsNullOrEmpty(ptPdtCode))
+            {
+                var aoPdt = new cProductService().C_GETaoProduct(ptPdtCode);
+                if (aoPdt.Count==1)
+                {
+                    bModeEdit = true;
+                    var oPdt = aoPdt[0];
+                    obtPdtCode.Text = oPdt.rtCode;
+                    obtPdtName.Text = oPdt.rtName;
+                    obtPdtQty.Text = oPdt.rnQty.ToString();
+                    obtPdtPri.Text = oPdt.rcPri.ToString();
+                }
+            }
         }
 
         public static byte[] W_GETanImgByte(Bitmap bitmap)
@@ -65,14 +79,30 @@ namespace WinFormSTD.Products
 
             // Write the bytes (as a Base64 string) to the textbox
             string tImgBase64 = base64String;
-            bool bChkAddProduct = new cProductService().C_ADDbProduct(new BuildingBlocks.Models.WebService.Request.ShopOnline.cmlDataProduct
+            bool bChkAddProduct = false;
+            if (bModeEdit)
             {
-                ptCode = tPdtCode,
-                ptName = tPdtName,
-                pnQty = nPdtcQty,
-                pnPri = cPdtPri,
-                ptImgPdt = tImgBase64,
-            });
+                bChkAddProduct = new cProductService().C_UPDbProduct(new BuildingBlocks.Models.WebService.Request.ShopOnline.cmlDataProduct
+                {
+                    ptCode = tPdtCode,
+                    ptName = tPdtName,
+                    pnQty = nPdtcQty,
+                    pnPri = cPdtPri,
+                    ptImgPdt = tImgBase64,
+                });
+            }
+            else
+            {
+                bChkAddProduct = new cProductService().C_ADDbProduct(new BuildingBlocks.Models.WebService.Request.ShopOnline.cmlDataProduct
+                {
+                    ptCode = tPdtCode,
+                    ptName = tPdtName,
+                    pnQty = nPdtcQty,
+                    pnPri = cPdtPri,
+                    ptImgPdt = tImgBase64,
+                });
+            }
+           
             if (bChkAddProduct)
             {
                 MessageBox.Show("บันทักข้อมูลสำเสร็จ", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -324,16 +324,73 @@ namespace ConAppSTD.Class
                                     Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
                                     Thread.Sleep(500);
                                     break;
-                                case "MaxQueueAddSell":
+                                case "MaxQueueUpdPdt":
                                     try
                                     {
                                         Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
                                         //Process 
-                                        cmlRcvData oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlRcvData>(tMessage);
+                                        cmlDataProduct oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlDataProduct>(tMessage);
+
+                                        cExample oExample = new cExample();
+                                        string tMsgErr = "";
+                                        bPrc = cExample.C_PRCxUpdPdtTransaction(oRcvData);
+
+                                        if (bPrc)
+                                        {
+                                            //delete this message queue
+                                            poChannel.BasicAck(oEevntArgs.DeliveryTag, false);
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    }
+                                    catch (Exception oEx)
+                                    {
+
+                                    }
+                                    Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
+                                    Thread.Sleep(500);
+                                    break;
+
+                                case "MaxQueueDelPdt":
+                                    try
+                                    {
+                                        Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
+                                        //Process 
+                                        string tPdtCode = tMessage;
+
+                                        cExample oExample = new cExample();
+                                        string tMsgErr = "";
+                                        bPrc = cExample.C_PRCxDelPdtTransaction(tPdtCode);
+
+                                        if (bPrc)
+                                        {
+                                            //delete this message queue
+                                            poChannel.BasicAck(oEevntArgs.DeliveryTag, false);
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    }
+                                    catch (Exception oEx)
+                                    {
+
+                                    }
+                                    Console.WriteLine("Receive Queue Nmae: " + ptQueue + " end.");
+                                    Thread.Sleep(500);
+                                    break;
+                                case "MaxQueueChackOut":
+                                    try
+                                    {
+                                        Console.WriteLine("Receive Queue Nmae: " + ptQueue + " start.");
+                                        //Process 
+                                        List<cmlDataCheckOut> oRcvData = Newtonsoft.Json.JsonConvert.DeserializeObject<List<cmlDataCheckOut>>(tMessage);
 
                                         cExample oExample = new cExample();
 
-                                        bPrc = oExample.C_PRCbExample(oRcvData, out tMsgErr);
+                                        bPrc = oExample.C_PRCxChackOutTransaction(oRcvData);
 
                                         if (bPrc)
                                         {

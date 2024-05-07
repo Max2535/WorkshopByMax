@@ -12,7 +12,7 @@ namespace WinFormSTD.Services
 {
     public class cProductService
     {
-        private readonly IConfiguration oConfiguration;
+        private static IConfiguration oConfiguration;
         public cProductService() {
             // Set up configuration
             var configurationBuilder = new ConfigurationBuilder()
@@ -45,18 +45,119 @@ namespace WinFormSTD.Services
         {
             try
             {
+                // Get configuration values
+                string tAccess = oConfiguration["AppSettings:tAccess"];
+                string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
                 string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(poData);
-                var options = new RestClientOptions("http://localhost:50210");
+                var options = new RestClientOptions(tUrlApi);
                 var client = new RestClient(options);
                 var request = new RestRequest("/ShopOnline/AddProduct", Method.Post);
-                request.AddHeader("X-Api-Key", "123456789");
+                request.AddHeader("X-Api-Key", tAccess);
                 request.AddHeader("Content-Type", "application/json");
                 var body = tMsgJson;
                 request.AddStringBody(body, DataFormat.Json);
                 RestResponse response = client.Execute(request);
                 var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
-                //TODO::
-                return true;
+                if (oRes.rtCode == "001")
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+
+            }
+        }
+        public bool C_UPDbProduct(cmlDataProduct poData)
+        {
+            try
+            {
+                // Get configuration values
+                string tAccess = oConfiguration["AppSettings:tAccess"];
+                string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
+                string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(poData);
+                var options = new RestClientOptions(tUrlApi);
+                var client = new RestClient(options);
+                var request = new RestRequest("/ShopOnline/UpdateProduct", Method.Put);
+                request.AddHeader("X-Api-Key", tAccess);
+                request.AddHeader("Content-Type", "application/json");
+                var body = tMsgJson;
+                request.AddStringBody(body, DataFormat.Json);
+                RestResponse response = client.Execute(request);
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                if (oRes.rtCode== "001")
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+
+            }
+        }
+
+        public bool C_DELbProduct(string ptPdtCode)
+        {
+            try
+            {
+                // Get configuration values
+                string tAccess = oConfiguration["AppSettings:tAccess"];
+                string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
+                var options = new RestClientOptions(tUrlApi);
+                var client = new RestClient(options);
+                var request = new RestRequest($"/ShopOnline/DelProduct/{ptPdtCode}", Method.Delete);
+                request.AddHeader("X-Api-Key", tAccess);
+                RestResponse response = client.Execute(request);
+                Console.WriteLine(response.Content);
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                if (oRes.rtCode == "001")
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+
+            }
+        }
+
+        public bool C_SalebChackOut(List<cmlDataCheckOut> paoCart)
+        {
+            try
+            {
+                // Get configuration values
+                string tAccess = oConfiguration["AppSettings:tAccess"];
+                string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
+                string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(paoCart);
+                var options = new RestClientOptions(tUrlApi);
+                var client = new RestClient(options);
+                var request = new RestRequest("/ShopOnline/ChackOut", Method.Post);
+                request.AddHeader("X-Api-Key", tAccess);
+                request.AddHeader("Content-Type", "application/json");
+                var body = tMsgJson;
+                request.AddStringBody(body, DataFormat.Json);
+                RestResponse response = client.Execute(request);
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                if (oRes.rtCode == "001")
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {

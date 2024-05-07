@@ -20,49 +20,81 @@ namespace WinFormSTD
             InitializeComponent();
             this.previousForm = previousForm;
             // Set the form style to None (removes border)
-            FormBorderStyle = FormBorderStyle.None;
+            //FormBorderStyle = FormBorderStyle.None;
 
             // Maximize the form
-            WindowState = FormWindowState.Maximized;
+            //WindowState = FormWindowState.Maximized;
             LOAD_PDxList();
         }
 
         private void LOAD_PDxList(string tSearchPdtCode = "")
         {
-            //pcloader.Visible = true;
-            //pcloader.Dock = DockStyle.Fill;
-            //pcloader.Visible = false;
-
-            var data = new cProductService().C_GETaoProduct(tSearchPdtCode);
-            ogbPdt.DataSource = data;
+            ogbPdt.Columns.Clear();
+            //ogbPdt.Rows.Clear();
+            //ogbPdt.Refresh();
+            var aoPdt = new cProductService().C_GETaoProduct(tSearchPdtCode);
+            ogbPdt.DataSource = aoPdt;
             ogbPdt.Columns[0].HeaderText = "รหัสสินค้า";
-            ogbPdt.Columns[1].HeaderText = "ชื่อสินค้า";
+            ogbPdt.Columns[0].HeaderText = "ชื่อสินค้า";
             ogbPdt.Columns[2].HeaderText = "จำนวน";
             ogbPdt.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             ogbPdt.Columns[3].HeaderText = "ราคาขาย";
             ogbPdt.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             ogbPdt.Columns[4].HeaderText = "Image";
+            ogbPdt.Columns[4].Visible = false;
             ogbPdt.CellFormatting += C_SETxCellFormat;
             // Add a button column to the DataGridView
-            DataGridViewButtonColumn oBtnCol = new DataGridViewButtonColumn();
-            oBtnCol.HeaderText = "Actions";
-            oBtnCol.Text = "Edit";
-            oBtnCol.UseColumnTextForButtonValue = true;
-            ogbPdt.Columns.Add(oBtnCol);
+            DataGridViewButtonColumn oBtnEditCol = new DataGridViewButtonColumn();
+            oBtnEditCol.HeaderText = "";
+            oBtnEditCol.Text = "Edit";
+            oBtnEditCol.UseColumnTextForButtonValue = true;
+            ogbPdt.Columns.Add(oBtnEditCol);
+
+            // Add a button column to the DataGridView
+            DataGridViewButtonColumn oBtnDelCol = new DataGridViewButtonColumn();
+            oBtnDelCol.HeaderText = "";
+            oBtnDelCol.Text = "Delete";
+            oBtnDelCol.UseColumnTextForButtonValue = true;
+            ogbPdt.Columns.Add(oBtnDelCol);
 
             // Handle the button click event
             ogbPdt.CellContentClick += (sender, e) =>
             {
-                if (e.ColumnIndex == oBtnCol.Index && e.RowIndex >= 0)
+                if (e.ColumnIndex == oBtnEditCol.Index && e.RowIndex >= 0)
                 {
-                    // Handle button click action
-                    // You can access the row data using e.RowIndex
-                    
-                    wAddProduct wAddPdt = new wAddProduct();
-                    // Set the property value in Form
-                    DataGridViewRow oRow = ogbPdt.Rows[e.ColumnIndex];
-                    wAddPdt.ptPdtCode = e.ColumnIndex+"";
+                    string tPdtCode = "";
+                    foreach (DataGridViewRow oRow in ogbPdt.Rows)
+                    {
+                        tPdtCode = oRow.Cells["rtCode"].Value.ToString();
+                    }
+                    wAddProduct wAddPdt = new wAddProduct(tPdtCode);
                     wAddPdt.Show();
+                }
+
+                if (e.ColumnIndex == oBtnDelCol.Index && e.RowIndex >= 0)
+                {
+                    string tPdtCode = "";
+                    foreach (DataGridViewRow oRow in ogbPdt.Rows)
+                    {
+                        tPdtCode = oRow.Cells["rtCode"].Value.ToString();
+                    }
+                    DialogResult result = MessageBox.Show($"คุณต้องการลบ {tPdtCode}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                       var bChkDelete =  new cProductService().C_DELbProduct(tPdtCode);
+                        if (bChkDelete)
+                        {
+                            MessageBox.Show("ลบข้อมูลสำเสร็จ", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("ลบข้อมูลไม่สำเสร็จ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        // ใส่โค้ดที่ต้องการให้ทำงานเมื่อผู้ใช้กด "No" ที่กล่องข้อความ
+                    }
                 }
             };
 
@@ -90,7 +122,6 @@ namespace WinFormSTD
 
         private void ocmSearchPdt_Click(object sender, EventArgs e)
         {
-
             string tSearchPdtCode = obtPdtCode.Text.ToLower(); // Convert search query to lowercase for case-insensitive search
             LOAD_PDxList(tSearchPdtCode);
         }
