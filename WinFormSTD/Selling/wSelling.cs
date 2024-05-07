@@ -21,7 +21,7 @@ namespace WinFormSTD
         public wSelling()
         {
             InitializeComponent();
-            LOAD_PDxList();
+            LOAD_SALExList();
 
             // Create a new DataTable
             aoDataTable = new DataTable();
@@ -37,7 +37,7 @@ namespace WinFormSTD
             //WindowState = FormWindowState.Maximized;
             ogbCartPdt.DataSource = aoDataTable;
         }
-        private void LOAD_PDxList(string tSearchPdtCode = "")
+        private void LOAD_SALExList(string tSearchPdtCode = "")
         {
             ogbSalePdt.Columns.Clear();
             var aoPdt = new cProductService().C_GETaoProduct(tSearchPdtCode);
@@ -116,7 +116,7 @@ namespace WinFormSTD
         private void ocmSaleSearchPdtCode_Click(object sender, EventArgs e)
         {
             string tSearchPdtCode = otbSalePdtCode.Text.ToLower(); // Convert search query to lowercase for case-insensitive search
-            LOAD_PDxList(tSearchPdtCode);
+            LOAD_SALExList(tSearchPdtCode);
         }
 
         private void ocmCheckOut_Click(object sender, EventArgs e)
