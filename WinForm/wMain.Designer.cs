@@ -33,6 +33,7 @@
             ocmSelling = new System.Windows.Forms.Button();
             ocmOrders = new System.Windows.Forms.Button();
             ocmSearchOrdNo = new System.Windows.Forms.Button();
+            ocmClose = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // olaMainTitle
@@ -85,17 +86,29 @@
             ocmSearchOrdNo.UseVisualStyleBackColor = true;
             ocmSearchOrdNo.Click += ocmSearchOrdNo_Click;
             // 
+            // ocmClose
+            // 
+            ocmClose.Location = new System.Drawing.Point(58, 388);
+            ocmClose.Name = "ocmClose";
+            ocmClose.Size = new System.Drawing.Size(711, 53);
+            ocmClose.TabIndex = 6;
+            ocmClose.Text = "ออก";
+            ocmClose.UseVisualStyleBackColor = true;
+            ocmClose.Click += ocmClose_Click;
+            // 
             // wMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(816, 416);
+            ClientSize = new System.Drawing.Size(819, 509);
+            Controls.Add(ocmClose);
             Controls.Add(ocmSearchOrdNo);
             Controls.Add(ocmOrders);
             Controls.Add(ocmSelling);
             Controls.Add(ocmProducts);
             Controls.Add(olaMainTitle);
             Name = "wMain";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Main";
             ResumeLayout(false);
             PerformLayout();
@@ -107,5 +120,6 @@
         private System.Windows.Forms.Button ocmSelling;
         private System.Windows.Forms.Button ocmOrders;
         private System.Windows.Forms.Button ocmSearchOrdNo;
+        private System.Windows.Forms.Button ocmClose;
     }
 }

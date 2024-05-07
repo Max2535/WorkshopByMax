@@ -14,6 +14,7 @@ namespace WinForm.Products
 {
     public partial class wAddProduct : Form
     {
+        public string ptPdtCode { get; set; }
         public wAddProduct()
         {
             InitializeComponent();
@@ -64,7 +65,7 @@ namespace WinForm.Products
 
             // Write the bytes (as a Base64 string) to the textbox
             string tImgBase64 = base64String;
-            bool bChkAddProduct = cProductService.C_ADDbProduct(new BuildingBlocks.Models.WebService.Request.ShopOnline.cmlDataProduct
+            bool bChkAddProduct = new cProductService().C_ADDbProduct(new BuildingBlocks.Models.WebService.Request.ShopOnline.cmlDataProduct
             {
                 ptCode = tPdtCode,
                 ptName = tPdtName,

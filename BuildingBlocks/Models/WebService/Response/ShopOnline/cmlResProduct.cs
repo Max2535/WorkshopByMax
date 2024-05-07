@@ -9,8 +9,8 @@ namespace BuildingBlocks.Models.WebService.Response.ShopOnline
     {
         public string rtCode { get; set; }
         public string rtName { get; set; }
-        public string rtImgPdt { get; set; }
         public int rnQty { get; set; }
         public decimal rcPri { get; set; }
+        public string rtImgPdt { get; set; }
     }
 }

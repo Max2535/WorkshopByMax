@@ -12,11 +12,11 @@ namespace BuildingBlocks.Controllers
     [Route("ShopOnline")]
     public class cShopOnlineController : Controller
     {
-        private readonly IcProductService _product;
+        private readonly C_IProductService oProduct;
 
-        public cShopOnlineController(IcProductService product)
+        public cShopOnlineController(C_IProductService product)
         {
-            _product=product;
+            oProduct=product;
         }
 
         [HttpPost]
@@ -89,8 +89,8 @@ namespace BuildingBlocks.Controllers
         }
 
         [HttpGet]
-        [Route("GetProduct")]
-        public cmlResList<cmlResProduct> GET_EXPoShopOnlineResObject()
+        [Route("GetProduct/{tSearchPdtCode?}")]
+        public cmlResList<cmlResProduct> GET_EXPoShopOnlineResObject(string tSearchPdtCode="")
         {
             cmlResList<cmlResProduct> oResult;
             string tErrAPI;
@@ -107,16 +107,10 @@ namespace BuildingBlocks.Controllers
                 }
                 else
                 {
-
+                    //TODO::
                 }
-
-
-                //To do process..
-                //...
-                //...
-                //...
-
-                oResult.raItems = _product.C_GETaoProduct();
+                //process..
+                oResult.raItems = oProduct.C_GETaoProduct(tSearchPdtCode);
                 oResult.rtCode = cMS.tMS_RespCode001;
                 oResult.rtDesc = cMS.tMS_RespDesc001;
                 return oResult;

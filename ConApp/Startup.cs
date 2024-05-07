@@ -99,7 +99,6 @@ namespace ConApp
                 }
                 catch (Exception ex)
                 {
-                    oContext = new cDbContext();
                     //Re queue
                     //oChannel.BasicNack(ea.DeliveryTag, false, true);
                     //Delete queue error

@@ -66,10 +66,14 @@ namespace WebApi
                .AddDbContext<cDbContext>(options =>
                {
                    options.UseSqlServer(Configuration.GetConnectionString("Database"));
-               }, ServiceLifetime.Singleton);
+               }, ServiceLifetime.Scoped);
                 services.AddControllers();
-
-                services.AddScoped<IcProductService, cProductService>();
+                /*
+                Transient: บริการจะถูกสร้างใหม่ทุกครั้งที่มีการร้องขอ (resolve) โดยผู้ใช้ ซึ่งหมายความว่าแต่ละการร้องขอจะได้รับการบริการที่ไม่เช่นเดียวกัน และบริการจะไม่ถูกกำหนดให้ใช้งานร่วมกันในระหว่างแต่ละการร้องขอ
+                Scoped: บริการจะถูกสร้างขึ้นใหม่ต่อคำขอ (request) แต่จะถูกทำให้พร้อมใช้งานในขอบเขตของการขอร้องนั้นๆ เพียงครั้งเดียว เมื่อคำขอสิ้นสุดลง บริการจะถูกทำลาย
+                Singleton: บริการจะถูกสร้างครั้งเดียวเท่านั้นและถูกใช้ร่วมกันทั่วโปรแกรม ซึ่งหมายความว่าแต่ละการร้องขอจะได้รับการบริการเหมือนเดิม และบริการจะไม่ถูกทำลายจนกว่าโปรแกรมจะสิ้นสุดการทำงาน
+                */
+                services.AddScoped<C_IProductService, C_ProductService>();
 
                 const string tReqHeaders = "X-Api-Key";
                 services.AddSwaggerGen(c =>

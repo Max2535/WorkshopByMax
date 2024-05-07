@@ -20,12 +20,18 @@ namespace WinForm
         public wMain()
         {
             InitializeComponent();
+            // Set the form style to None (removes border)
+            FormBorderStyle = FormBorderStyle.None;
+
+            // Maximize the form
+            WindowState = FormWindowState.Maximized;
         }
 
         private void ocmProducts_Click(object sender, EventArgs e)
         {
-            wProducts oPdt = new wProducts();
+            wProducts oPdt = new wProducts(this);
             oPdt.Show();
+            this.Hide(); // Hide the current form (Form1)
         }
 
         private void ocmSelling_Click(object sender, EventArgs e)
@@ -44,6 +50,11 @@ namespace WinForm
         {
             wStock oStock = new wStock();
             oStock.Show();
+        }
+
+        private void ocmClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

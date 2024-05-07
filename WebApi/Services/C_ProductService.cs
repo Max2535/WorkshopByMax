@@ -7,27 +7,32 @@ using BuildingBlocks.Models.WebService.Response.ShopOnline;
 
 namespace WebApi.Services
 {
-    public class cProductService : IcProductService
+    public class C_ProductService : C_IProductService
     {
         private readonly cDbContext oContext;
 
-        public cProductService(cDbContext context)
+        public C_ProductService(cDbContext context)
         {
             oContext = context;
         }
 
         public bool C_ADDbProduct(cmlDataProduct oShopOnline)
         {
+            //Send RabbitMQ
             throw new System.NotImplementedException();
         }
 
-        public List<cmlResProduct> C_GETaoProduct()
+        public List<cmlResProduct> C_GETaoProduct(string tSearchPdtCode = "")
         {
             try
             {
                 List<cmlResProduct> aoProduct = new List<cmlResProduct>();
-                var cmlPdt = oContext.TSOLMProducts.ToList();
-                foreach (var pdt in cmlPdt)
+                var cmlPdt = oContext.TSOLMProducts.AsQueryable();
+                if (!string.IsNullOrEmpty(tSearchPdtCode))
+                {
+                    cmlPdt = cmlPdt.Where(x=>x.FTPdtCode.Contains(tSearchPdtCode));
+                }
+                foreach (var pdt in cmlPdt.ToList())
                 {
                     aoProduct.Add(new cmlResProduct
                     {

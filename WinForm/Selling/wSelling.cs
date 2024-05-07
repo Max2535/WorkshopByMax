@@ -15,6 +15,11 @@ namespace WinForm
         public wSelling()
         {
             InitializeComponent();
+            // Set the form style to None (removes border)
+            FormBorderStyle = FormBorderStyle.None;
+
+            // Maximize the form
+            WindowState = FormWindowState.Maximized;
         }
     }
 }

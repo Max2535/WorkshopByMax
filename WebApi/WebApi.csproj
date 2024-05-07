@@ -22,4 +22,8 @@
     <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Content\Upload\Product\" />
+  </ItemGroup>
+
 </Project>
