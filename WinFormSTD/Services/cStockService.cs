@@ -27,13 +27,13 @@ namespace WinFormSTD.Services
                 // Get configuration values
                 string tAccess = oConfiguration["AppSettings:tAccess"];
                 string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
-                var options = new RestClientOptions(tUrlApi);
-                var client = new RestClient(options);
-                var request = new RestRequest($"/ShopOnline/GetOrder/{tSearchPdtCode}", Method.Get);
-                request.AddHeader("X-Api-Key", tAccess);
-                RestResponse response = client.Execute(request);
-                Console.WriteLine(response.Content);
-                var aoResList = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResList<cmlResOrder>>(response.Content);
+                RestClientOptions oPtions = new RestClientOptions(tUrlApi);
+                RestClient oClient = new RestClient(oPtions);
+                RestRequest oRrequest = new RestRequest($"/ShopOnline/GetOrder/{tSearchPdtCode}", Method.Get);
+                oRrequest.AddHeader("X-Api-Key", tAccess);
+                RestResponse oResponse= oClient.Execute(oRrequest);
+                Console.WriteLine(oResponse.Content);
+                var aoResList = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResList<cmlResOrder>>(oResponse.Content);
                 return aoResList.raItems;
             }catch (Exception)
             {

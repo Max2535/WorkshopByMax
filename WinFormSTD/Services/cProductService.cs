@@ -27,13 +27,13 @@ namespace WinFormSTD.Services
                 // Get configuration values
                 string tAccess = oConfiguration["AppSettings:tAccess"];
                 string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
-                var options = new RestClientOptions(tUrlApi);
-                var client = new RestClient(options);
-                var request = new RestRequest($"/ShopOnline/GetProduct/{tSearchPdtCode}", Method.Get);
-                request.AddHeader("X-Api-Key", tAccess);
-                RestResponse response = client.Execute(request);
-                Console.WriteLine(response.Content);
-                var aoResList = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResList<cmlResProduct>>(response.Content);
+                RestClientOptions oPtions = new RestClientOptions(tUrlApi);
+                RestClient oClient = new RestClient(oPtions);
+                RestRequest oRrequest = new RestRequest($"/ShopOnline/GetProduct/{tSearchPdtCode}", Method.Get);
+                oRrequest.AddHeader("X-Api-Key", tAccess);
+                RestResponse oResponse= oClient.Execute(oRrequest);
+                Console.WriteLine(oResponse.Content);
+                var aoResList = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResList<cmlResProduct>>(oResponse.Content);
                 return aoResList.raItems;
             }catch (Exception)
             {
@@ -49,15 +49,15 @@ namespace WinFormSTD.Services
                 string tAccess = oConfiguration["AppSettings:tAccess"];
                 string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
                 string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(poData);
-                var options = new RestClientOptions(tUrlApi);
-                var client = new RestClient(options);
-                var request = new RestRequest("/ShopOnline/AddProduct", Method.Post);
-                request.AddHeader("X-Api-Key", tAccess);
-                request.AddHeader("Content-Type", "application/json");
+                RestClientOptions oPtions = new RestClientOptions(tUrlApi);
+                RestClient oClient = new RestClient(oPtions);
+                RestRequest oRrequest = new RestRequest("/ShopOnline/AddProduct", Method.Post);
+                oRrequest.AddHeader("X-Api-Key", tAccess);
+                oRrequest.AddHeader("Content-Type", "application/json");
                 var body = tMsgJson;
-                request.AddStringBody(body, DataFormat.Json);
-                RestResponse response = client.Execute(request);
-                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                oRrequest.AddStringBody(body, DataFormat.Json);
+                RestResponse oResponse= oClient.Execute(oRrequest);
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(oResponse.Content);
                 if (oRes.rtCode == "001")
                 {
                     return true;
@@ -81,15 +81,15 @@ namespace WinFormSTD.Services
                 string tAccess = oConfiguration["AppSettings:tAccess"];
                 string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
                 string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(poData);
-                var options = new RestClientOptions(tUrlApi);
-                var client = new RestClient(options);
-                var request = new RestRequest("/ShopOnline/UpdateProduct", Method.Put);
-                request.AddHeader("X-Api-Key", tAccess);
-                request.AddHeader("Content-Type", "application/json");
+                RestClientOptions oPtions = new RestClientOptions(tUrlApi);
+                RestClient oClient = new RestClient(oPtions);
+                RestRequest oRrequest = new RestRequest("/ShopOnline/UpdateProduct", Method.Put);
+                oRrequest.AddHeader("X-Api-Key", tAccess);
+                oRrequest.AddHeader("Content-Type", "application/json");
                 var body = tMsgJson;
-                request.AddStringBody(body, DataFormat.Json);
-                RestResponse response = client.Execute(request);
-                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                oRrequest.AddStringBody(body, DataFormat.Json);
+                RestResponse oResponse= oClient.Execute(oRrequest);
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(oResponse.Content);
                 if (oRes.rtCode== "001")
                 {
                     return true;
@@ -113,13 +113,13 @@ namespace WinFormSTD.Services
                 // Get configuration values
                 string tAccess = oConfiguration["AppSettings:tAccess"];
                 string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
-                var options = new RestClientOptions(tUrlApi);
-                var client = new RestClient(options);
-                var request = new RestRequest($"/ShopOnline/DelProduct/{ptPdtCode}", Method.Delete);
-                request.AddHeader("X-Api-Key", tAccess);
-                RestResponse response = client.Execute(request);
-                Console.WriteLine(response.Content);
-                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                RestClientOptions oPtions = new RestClientOptions(tUrlApi);
+                RestClient oClient = new RestClient(oPtions);
+                RestRequest oRrequest = new RestRequest($"/ShopOnline/DelProduct/{ptPdtCode}", Method.Delete);
+                oRrequest.AddHeader("X-Api-Key", tAccess);
+                RestResponse oResponse= oClient.Execute(oRrequest);
+                Console.WriteLine(oResponse.Content);
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(oResponse.Content);
                 if (oRes.rtCode == "001")
                 {
                     return true;
@@ -144,15 +144,15 @@ namespace WinFormSTD.Services
                 string tAccess = oConfiguration["AppSettings:tAccess"];
                 string tUrlApi = oConfiguration["AppSettings:tUrlApi"];
                 string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(paoCart);
-                var options = new RestClientOptions(tUrlApi);
-                var client = new RestClient(options);
-                var request = new RestRequest("/ShopOnline/ChackOut", Method.Post);
-                request.AddHeader("X-Api-Key", tAccess);
-                request.AddHeader("Content-Type", "application/json");
+                RestClientOptions oPtions = new RestClientOptions(tUrlApi);
+                RestClient oClient = new RestClient(oPtions);
+                RestRequest oRrequest = new RestRequest("/ShopOnline/ChackOut", Method.Post);
+                oRrequest.AddHeader("X-Api-Key", tAccess);
+                oRrequest.AddHeader("Content-Type", "application/json");
                 var body = tMsgJson;
-                request.AddStringBody(body, DataFormat.Json);
-                RestResponse response = client.Execute(request);
-                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(response.Content);
+                oRrequest.AddStringBody(body, DataFormat.Json);
+                RestResponse oResponse= oClient.Execute(oRrequest);
+                var oRes = Newtonsoft.Json.JsonConvert.DeserializeObject<cmlResBase>(oResponse.Content);
                 if (oRes.rtCode == "001")
                 {
                     return true;
