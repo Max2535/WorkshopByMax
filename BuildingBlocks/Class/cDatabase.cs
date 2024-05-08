@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Class.Class;
+﻿using BuildingBlocks.Class;
 using BuildingBlocks.Models.Config;
 using BuildingBlocks.Models.WebService.Response.ShopOnline;
 using Dapper;

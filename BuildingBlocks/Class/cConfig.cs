@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingBlocks.Class.Class
+namespace BuildingBlocks.Class
 {
     public class cConfig
     {
