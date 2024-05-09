@@ -62,7 +62,7 @@ namespace ConAppSTD.Class
                 oSql.AppendLine("BEGIN TRY");
                 oSql.AppendLine("    BEGIN TRAN");
 
-                oSql.AppendLine("    INSERT INTO [dbo].[TSOLMProduct] ([FTPdtCode], [FTPdtName], [FNPdtQty], [FNPdtCnfVat], [FCPdtPri], [FBPdtAct])");
+                oSql.AppendLine("    INSERT INTO TCNMProduct (FTPdtCode,FTPdtName, FNPdtQty, FNPdtCnfVat, FCPdtPri, FBPdtAct)");
                 oSql.AppendLine($"    VALUES (N'{poPdt.ptCode}', N'{poPdt.ptName}', {poPdt.pnQty}, 1, {poPdt.pnPri}, '1');");
 
                 oSql.AppendLine("    COMMIT TRAN");
@@ -100,7 +100,7 @@ namespace ConAppSTD.Class
                 oSql.AppendLine("BEGIN TRY");
                 oSql.AppendLine("    BEGIN TRAN");
 
-                oSql.AppendLine($"    UPDATE TSOLMProduct SET [FTPdtName] = N'{poPdt.ptName}', [FNPdtQty] = {poPdt.pnQty}, [FCPdtPri] = {poPdt.pnPri}");
+                oSql.AppendLine($"    UPDATE TCNMProduct SET FTPdtName = N'{poPdt.ptName}', FNPdtQty = {poPdt.pnQty}, FCPdtPri = {poPdt.pnPri}");
                 oSql.AppendLine($"    WHERE FTPdtCode = N'{poPdt.ptCode}';");
 
                 oSql.AppendLine("    COMMIT TRAN");
@@ -138,7 +138,7 @@ namespace ConAppSTD.Class
                 oSql.AppendLine("BEGIN TRY");
                 oSql.AppendLine("    BEGIN TRAN");
 
-                oSql.AppendLine($"    DELETE FROM TSOLMProduct");
+                oSql.AppendLine($"    DELETE FROM TCNMProduct");
                 oSql.AppendLine($"    WHERE FTPdtCode = N'{ptPdtCode}';");
 
                 oSql.AppendLine("    COMMIT TRAN");
@@ -244,7 +244,7 @@ namespace ConAppSTD.Class
                 oSql.AppendLine(@"SELECT TOP
 	                                    1 MAX(FTOrdCode) AS nMaxOrd
                                     FROM
-	                                    ( SELECT CAST ( FTOrdCode AS INT ) AS FTOrdCode FROM TSOLTOrder )
+	                                    ( SELECT CAST ( FTOrdCode AS INT ) AS FTOrdCode FROM TPSTOrder )
                                     AS nMax");
                 var oMaxOrd = oDB.C_GETaDataQuery<cmlDataCheckOut>(oSql.ToString());
                 String tOrdCode = "".PadLeft(3, '0') + (oMaxOrd[0].nMaxOrd+1);
@@ -254,12 +254,12 @@ namespace ConAppSTD.Class
                 //รายการสินค้า
                 foreach (var oCart in paoCart)
                 {
-                    oSql.AppendLine("    INSERT INTO TSOLTOrderDetails " +
-                        "                   ([FTOrdCode], [FTPdtCode], [FNOrdDtQty], [FCOrdDtPri])");
+                    oSql.AppendLine("    INSERT INTO TPSTOrderDetails " +
+                        "                   (FTOrdCode, FTPdtCode, FNOrdDtQty, FCOrdDtPri)");
                     oSql.AppendLine($"   VALUES (N'{tOrdCode}', N'{oCart.ptCode}', {oCart.pnQty}, {oCart.pnPri});");
                 }
                 //ใบสั่งซื้อ
-                oSql.AppendLine("    INSERT INTO TSOLTOrder ([FTOrdCode], [FTOrdCusName], [FDOrdDate], [FCOrdAmt])");
+                oSql.AppendLine("    INSERT INTO TPSTOrder (FTOrdCode, FTOrdCusName, FDOrdDate, FCOrdAmt)");
                 oSql.AppendLine($"        VALUES ('{tOrdCode}', 'test test {tOrdCode}', GETDATE(), {paoCart.Sum(s=>s.pnPri)});");
 
 

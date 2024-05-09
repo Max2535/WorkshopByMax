@@ -251,7 +251,7 @@ namespace WebApiSTD.Controllers
                     "FTPdtName AS rtName," +
                     "FNPdtQty AS rnQty," +
                     "FCPdtPri AS rcPri");
-                oSql.AppendLine("FROM TSOLMProduct");
+                oSql.AppendLine("FROM TCNMProduct");
                 if (!string.IsNullOrEmpty(ptSearchPdtCode))
                 {
                     //TODO::Sql parameter
@@ -376,7 +376,7 @@ namespace WebApiSTD.Controllers
 	                                    FTOrdCusName AS rdOrdCus,
 	                                    FCTotalPri AS rcTotalPri
                                     FROM
-	                                    VSOLTOrder");
+	                                    VPSTOrder");
                 if (!string.IsNullOrEmpty(ptOrdcode))
                 {
                     //TODO::Sql parameter
@@ -432,7 +432,7 @@ namespace WebApiSTD.Controllers
 	                                    FNInvQty AS rnInvQty,
 	                                    FDInvDate AS rdInvDte
                                     FROM
-	                                    VSOLTStock");
+	                                    VCNTStock");
                 if (pdDte!=null)
                 {
                     //TODO::Sql parameter
