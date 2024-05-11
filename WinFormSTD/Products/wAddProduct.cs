@@ -105,7 +105,7 @@ namespace WinFormSTD.Products
            
             if (bChkAddProduct)
             {
-                MessageBox.Show("บันทักข้อมูลสำเสร็จ", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("บันทึกข้อมูลสำเสร็จ", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
