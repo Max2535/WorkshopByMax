@@ -1,7 +1,17 @@
 ﻿using C1.Win.C1FlexGrid;
+using C1.Win.Interop;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Channels;
+using System.Text;
+using System.Threading;
+using System.Threading.Channels;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormC1.Models.WebService.Request.ShopOnline;
 using WindowsFormC1.Models.WebService.Response.ShopOnline;
@@ -11,11 +21,114 @@ namespace WindowsFormC1
 {
     public partial class wProduct : Form
     {
+        private ConnectionFactory oFactory;
+        private IConnection oConnection;
+        private IModel oChannel;
+        string tExchangeName = "ExchangeName1";
+        string tQueueName = "MaxQueueAddPdt";
+        string tRoutingKey = "";
         bool bModeEdit = false;
+        ThreadStart oStart;
+        Thread oTherad;
+
         public wProduct()
         {
             InitializeComponent();
+            //TODO get config
+            oFactory = new ConnectionFactory()
+            {
+                HostName = "27.254.239.245",
+                UserName = "Admin",
+                Password = "Admin",
+                //Port = 15672,
+                VirtualHost = "Probation_Arm"
+            };
+
+            try
+            {
+                //while (true)
+                //{
+                //    new Thread(() => C_PRCxinitRabbitMQ()).Start();
+                //    Task.Delay(10000).Wait();
+                //}
+
+                new Thread(() => C_PRCxinitRabbitMQ()).Start();
+
+                oStart = () => C_PRCxinitRabbitMQ();
+                oTherad = new Thread(oStart);
+                oTherad.Name = "PD_SAVE";
+                oTherad.IsBackground = true;
+                oTherad.Start();
+            }
+            catch (Exception oEx)
+            {
+                Console.WriteLine(oEx.Message);
+            }
             C_GETxPdtData();
+        }
+
+        private void C_PRCxinitRabbitMQ()
+        {
+            try
+            {
+                using (IConnection oConn = oFactory.CreateConnection())
+                {
+                    using (IModel oChannel = oConn.CreateModel())
+                    {
+                        oChannel.ExchangeDeclare(exchange: tExchangeName, type: ExchangeType.Fanout);
+                        oChannel.QueueDeclare(queue: "PD_SAVE", durable: true, exclusive: false, autoDelete: false, arguments: null);
+                        oChannel.QueueBind(queue: "PD_SAVE", exchange: tExchangeName, routingKey: tRoutingKey);
+
+                        while (true)
+                        {
+                            var oConsumer = new EventingBasicConsumer(oChannel);
+                            oConsumer.Received += (model, ea) =>
+                            {
+                                var body = ea.Body.ToArray();
+                                var message = Encoding.UTF8.GetString(body);
+                                Invoke(new Action(() =>
+                                {
+                                    Console.WriteLine(message);
+                                    C_GETxPdtData();
+                                    MessageBox.Show("บันทึกข้อมูลสำเสร็จ", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }));
+                            };
+
+                            oChannel.BasicConsume(queue: "PD_SAVE", autoAck: true, consumer: oConsumer);
+                        }
+                    }
+                }
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void C_PRCxSendToRabbitMQ(cmlDataProduct poPdt)
+        {
+
+            try
+            {
+                using (IConnection oConn = oFactory.CreateConnection())
+                {
+                    using (IModel oChannel = oConn.CreateModel())
+                    {
+                        string tMsgJson = Newtonsoft.Json.JsonConvert.SerializeObject(poPdt);
+                        oChannel.QueueDeclare(tQueueName, true, false, false, null);
+                        var oBody = Encoding.UTF8.GetBytes(tMsgJson);
+                        oChannel.BasicPublish("", tQueueName, false, null, oBody);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         private void C_GETxPdtData()
@@ -56,8 +169,10 @@ namespace WindowsFormC1
                 ogdPdt.SetCellStyle(nIndex, "ocmColButDel", oCellStyle);
             }
             W_SETxColGrid(ogdPdt);
-            //Activate merge mode:
-            ogdPdt.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.Default;
+            // Specify the type of merging allowed
+            ogdPdt.AllowMerging = C1.Win.C1FlexGrid.AllowMergingEnum.Free;
+            // Specify the column on which merging is allowed
+            ogdPdt.Cols[3].AllowMerging = true;
         }
         private void ogdPdt_CellChecked(object sender, RowColEventArgs e)
         {
@@ -200,13 +315,28 @@ namespace WindowsFormC1
             }
             else
             {
-                bChkProduct = new cProductService().C_ADDbProduct(new cmlDataProduct
+                if (ockSaveEvent.Checked)
                 {
-                    ptCode = tPdtCode,
-                    ptName = tPdtName,
-                    pnQty = nPdtcQty,
-                    pnPri = cPdtPri,
-                });
+                    bChkProduct = new cProductService().C_ADDbProduct(new cmlDataProduct
+                    {
+                        ptCode = tPdtCode,
+                        ptName = tPdtName,
+                        pnQty = nPdtcQty,
+                        pnPri = cPdtPri,
+                    });
+                }
+                else
+                {
+                    C_PRCxSendToRabbitMQ(new cmlDataProduct
+                    {
+                        ptCode = tPdtCode,
+                        ptName = tPdtName,
+                        pnQty = nPdtcQty,
+                        pnPri = cPdtPri,
+                    });
+                    return;
+                }
+                
             }
 
             if (bChkProduct)

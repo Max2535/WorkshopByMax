@@ -43,6 +43,7 @@ namespace WindowsFormC1
             this.olaPdtName = new System.Windows.Forms.Label();
             this.olaPdtQty = new System.Windows.Forms.Label();
             this.olaPdtPri = new System.Windows.Forms.Label();
+            this.ockSaveEvent = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ogdPdt)).BeginInit();
             this.SuspendLayout();
             // 
@@ -164,11 +165,22 @@ namespace WindowsFormC1
             this.olaPdtPri.Text = "ราคา";
             this.olaPdtPri.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // ockSaveEvent
+            // 
+            this.ockSaveEvent.AutoSize = true;
+            this.ockSaveEvent.Location = new System.Drawing.Point(407, 13);
+            this.ockSaveEvent.Name = "ockSaveEvent";
+            this.ockSaveEvent.Size = new System.Drawing.Size(172, 24);
+            this.ockSaveEvent.TabIndex = 11;
+            this.ockSaveEvent.Text = "บันทึกผ่าน WebHook";
+            this.ockSaveEvent.UseVisualStyleBackColor = true;
+            // 
             // wProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 675);
+            this.Controls.Add(this.ockSaveEvent);
             this.Controls.Add(this.ocmPdtReset);
             this.Controls.Add(this.ocmPdtSave);
             this.Controls.Add(this.olaPdtPri);
@@ -202,5 +214,6 @@ namespace WindowsFormC1
         private System.Windows.Forms.Label olaPdtName;
         private System.Windows.Forms.Label olaPdtQty;
         private System.Windows.Forms.Label olaPdtPri;
+        private System.Windows.Forms.CheckBox ockSaveEvent;
     }
 }

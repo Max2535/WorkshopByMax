@@ -9,6 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using ConAppSTD.Models.Receive;
 using BuildingBlocks.Models.WebService.Request.ShopOnline;
+using System.Xml.Linq;
+using System.Drawing;
+using System.Threading.Channels;
+using System.Runtime.Intrinsics.X86;
 
 namespace ConAppSTD.Class
 {
@@ -311,6 +315,19 @@ namespace ConAppSTD.Class
                                         {
                                             //delete this message queue
                                             poChannel.BasicAck(oEevntArgs.DeliveryTag, false);
+                                            string ptMsgErr = "";
+                                            //Publish
+                                            try
+                                            {
+                                                string tMsgJson = tMessage;
+                                                poChannel.QueueDeclare("PD_SAVE", true, false, false, null);
+                                                var oBody = Encoding.UTF8.GetBytes(tMsgJson);
+                                                poChannel.BasicPublish("", "PD_SAVE", false, null, oBody);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.WriteLine(ex.Message);
+                                            }
                                         }
                                         else
                                         {
