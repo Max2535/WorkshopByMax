@@ -34,10 +34,10 @@ namespace WindowsFormC1
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(wProduct));
             this.ogdPdt = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.olaPdtCode = new System.Windows.Forms.Label();
-            this.obtPdtCode = new System.Windows.Forms.TextBox();
-            this.obtPdtName = new System.Windows.Forms.TextBox();
-            this.obtPdtQty = new System.Windows.Forms.TextBox();
-            this.obtPdtPri = new System.Windows.Forms.TextBox();
+            this.otbPdtCode = new System.Windows.Forms.TextBox();
+            this.otbPdtName = new System.Windows.Forms.TextBox();
+            this.otbPdtQty = new System.Windows.Forms.TextBox();
+            this.otbPdtPri = new System.Windows.Forms.TextBox();
             this.ocmPdtSave = new System.Windows.Forms.Button();
             this.ocmPdtReset = new System.Windows.Forms.Button();
             this.olaPdtName = new System.Windows.Forms.Label();
@@ -80,37 +80,37 @@ namespace WindowsFormC1
             this.olaPdtCode.Text = "รหัสสินค้า";
             this.olaPdtCode.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // obtPdtCode
+            // otbPdtCode
             // 
-            this.obtPdtCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.obtPdtCode.Location = new System.Drawing.Point(126, 16);
-            this.obtPdtCode.Name = "obtPdtCode";
-            this.obtPdtCode.Size = new System.Drawing.Size(224, 35);
-            this.obtPdtCode.TabIndex = 2;
+            this.otbPdtCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.otbPdtCode.Location = new System.Drawing.Point(126, 16);
+            this.otbPdtCode.Name = "otbPdtCode";
+            this.otbPdtCode.Size = new System.Drawing.Size(224, 35);
+            this.otbPdtCode.TabIndex = 2;
             // 
-            // obtPdtName
+            // otbPdtName
             // 
-            this.obtPdtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.obtPdtName.Location = new System.Drawing.Point(126, 57);
-            this.obtPdtName.Name = "obtPdtName";
-            this.obtPdtName.Size = new System.Drawing.Size(224, 35);
-            this.obtPdtName.TabIndex = 3;
+            this.otbPdtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.otbPdtName.Location = new System.Drawing.Point(126, 57);
+            this.otbPdtName.Name = "otbPdtName";
+            this.otbPdtName.Size = new System.Drawing.Size(224, 35);
+            this.otbPdtName.TabIndex = 3;
             // 
-            // obtPdtQty
+            // otbPdtQty
             // 
-            this.obtPdtQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.obtPdtQty.Location = new System.Drawing.Point(126, 98);
-            this.obtPdtQty.Name = "obtPdtQty";
-            this.obtPdtQty.Size = new System.Drawing.Size(224, 35);
-            this.obtPdtQty.TabIndex = 4;
+            this.otbPdtQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.otbPdtQty.Location = new System.Drawing.Point(126, 98);
+            this.otbPdtQty.Name = "otbPdtQty";
+            this.otbPdtQty.Size = new System.Drawing.Size(224, 35);
+            this.otbPdtQty.TabIndex = 4;
             // 
-            // obtPdtPri
+            // otbPdtPri
             // 
-            this.obtPdtPri.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.obtPdtPri.Location = new System.Drawing.Point(126, 139);
-            this.obtPdtPri.Name = "obtPdtPri";
-            this.obtPdtPri.Size = new System.Drawing.Size(224, 35);
-            this.obtPdtPri.TabIndex = 5;
+            this.otbPdtPri.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.otbPdtPri.Location = new System.Drawing.Point(126, 139);
+            this.otbPdtPri.Name = "otbPdtPri";
+            this.otbPdtPri.Size = new System.Drawing.Size(224, 35);
+            this.otbPdtPri.TabIndex = 5;
             // 
             // ocmPdtSave
             // 
@@ -186,10 +186,10 @@ namespace WindowsFormC1
             this.Controls.Add(this.olaPdtPri);
             this.Controls.Add(this.olaPdtQty);
             this.Controls.Add(this.olaPdtName);
-            this.Controls.Add(this.obtPdtPri);
-            this.Controls.Add(this.obtPdtQty);
-            this.Controls.Add(this.obtPdtName);
-            this.Controls.Add(this.obtPdtCode);
+            this.Controls.Add(this.otbPdtPri);
+            this.Controls.Add(this.otbPdtQty);
+            this.Controls.Add(this.otbPdtName);
+            this.Controls.Add(this.otbPdtCode);
             this.Controls.Add(this.olaPdtCode);
             this.Controls.Add(this.ogdPdt);
             this.Name = "wProduct";
@@ -205,10 +205,10 @@ namespace WindowsFormC1
 
         private C1.Win.C1FlexGrid.C1FlexGrid ogdPdt;
         private System.Windows.Forms.Label olaPdtCode;
-        private System.Windows.Forms.TextBox obtPdtCode;
-        private System.Windows.Forms.TextBox obtPdtName;
-        private System.Windows.Forms.TextBox obtPdtQty;
-        private System.Windows.Forms.TextBox obtPdtPri;
+        private System.Windows.Forms.TextBox otbPdtCode;
+        private System.Windows.Forms.TextBox otbPdtName;
+        private System.Windows.Forms.TextBox otbPdtQty;
+        private System.Windows.Forms.TextBox otbPdtPri;
         private System.Windows.Forms.Button ocmPdtSave;
         private System.Windows.Forms.Button ocmPdtReset;
         private System.Windows.Forms.Label olaPdtName;

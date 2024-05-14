@@ -35,13 +35,13 @@ namespace WinFormSTD
         {
             ogbPdt = new System.Windows.Forms.DataGridView();
             olaPdtCode = new System.Windows.Forms.Label();
-            obtPdtCode = new System.Windows.Forms.TextBox();
+            otbPdtCode = new System.Windows.Forms.TextBox();
             ocmSearchPdt = new System.Windows.Forms.Button();
             ocmResetPdt = new System.Windows.Forms.Button();
-            pcloader = new System.Windows.Forms.PictureBox();
+            opbPcloader = new System.Windows.Forms.PictureBox();
             ocmBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)ogbPdt).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pcloader).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)opbPcloader).BeginInit();
             SuspendLayout();
             // 
             // ogbPdt
@@ -66,12 +66,12 @@ namespace WinFormSTD
             olaPdtCode.TabIndex = 1;
             olaPdtCode.Text = "ชื่อสินค้า";
             // 
-            // obtPdtCode
+            // otbPdtCode
             // 
-            obtPdtCode.Location = new System.Drawing.Point(124, 29);
-            obtPdtCode.Name = "obtPdtCode";
-            obtPdtCode.Size = new System.Drawing.Size(354, 31);
-            obtPdtCode.TabIndex = 2;
+            otbPdtCode.Location = new System.Drawing.Point(124, 29);
+            otbPdtCode.Name = "otbPdtCode";
+            otbPdtCode.Size = new System.Drawing.Size(354, 31);
+            otbPdtCode.TabIndex = 2;
             // 
             // ocmSearchPdt
             // 
@@ -93,16 +93,16 @@ namespace WinFormSTD
             ocmResetPdt.UseVisualStyleBackColor = true;
             ocmResetPdt.Click += ocmAddPdt_Click;
             // 
-            // pcloader
+            // opbPcloader
             // 
-            pcloader.Image = Properties.Resources.Loading;
-            pcloader.Location = new System.Drawing.Point(662, 388);
-            pcloader.Name = "pcloader";
-            pcloader.Size = new System.Drawing.Size(475, 480);
-            pcloader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            pcloader.TabIndex = 5;
-            pcloader.TabStop = false;
-            pcloader.Visible = false;
+            opbPcloader.Image = Properties.Resources.Loading;
+            opbPcloader.Location = new System.Drawing.Point(662, 388);
+            opbPcloader.Name = "opbPcloader";
+            opbPcloader.Size = new System.Drawing.Size(475, 480);
+            opbPcloader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            opbPcloader.TabIndex = 5;
+            opbPcloader.TabStop = false;
+            opbPcloader.Visible = false;
             // 
             // ocmBack
             // 
@@ -120,16 +120,16 @@ namespace WinFormSTD
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(843, 456);
             Controls.Add(ocmBack);
-            Controls.Add(pcloader);
+            Controls.Add(opbPcloader);
             Controls.Add(ocmResetPdt);
             Controls.Add(ocmSearchPdt);
-            Controls.Add(obtPdtCode);
+            Controls.Add(otbPdtCode);
             Controls.Add(olaPdtCode);
             Controls.Add(ogbPdt);
             Name = "wProducts";
             Text = "รายการสินค้า";
             ((System.ComponentModel.ISupportInitialize)ogbPdt).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pcloader).EndInit();
+            ((System.ComponentModel.ISupportInitialize)opbPcloader).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -183,10 +183,10 @@ namespace WinFormSTD
 
         private System.Windows.Forms.DataGridView ogbPdt;
         private System.Windows.Forms.Label olaPdtCode;
-        private System.Windows.Forms.TextBox obtPdtCode;
+        private System.Windows.Forms.TextBox otbPdtCode;
         private System.Windows.Forms.Button ocmSearchPdt;
         private System.Windows.Forms.Button ocmResetPdt;
-        private System.Windows.Forms.PictureBox pcloader;
+        private System.Windows.Forms.PictureBox opbPcloader;
         private System.Windows.Forms.Button ocmBack;
     }
 }

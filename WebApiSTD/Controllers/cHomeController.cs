@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebApiSTD.Controllers
 {
-    public class HomeController : Controller
+    public class cHomeController : Controller
     {
         [HttpGet]
         public ActionResult Index()

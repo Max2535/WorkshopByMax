@@ -136,6 +136,7 @@ namespace WinFormSTD
             if (bChkChackOut)
             {
                 MessageBox.Show("สั่งซื้อสำเสร็จ", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
             else
             {

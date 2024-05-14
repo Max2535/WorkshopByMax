@@ -215,10 +215,10 @@ namespace WindowsFormC1
                     {
                         ogdPdt.FocusRect = FocusRectEnum.Light;
 
-                        obtPdtCode.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["tColPdtCode"].Index).ToString();
-                        obtPdtName.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["tColPdtName"].Index).ToString();
-                        obtPdtQty.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["nColPdtQty"].Index).ToString();
-                        obtPdtPri.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["cColPdtPri"].Index).ToString();
+                        otbPdtCode.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["tColPdtCode"].Index).ToString();
+                        otbPdtName.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["tColPdtName"].Index).ToString();
+                        otbPdtQty.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["nColPdtQty"].Index).ToString();
+                        otbPdtPri.Text = ogdPdt.GetData(ogdPdt.Row, ogdPdt.Cols["cColPdtPri"].Index).ToString();
 
                         bModeEdit = true;
                         return;
@@ -277,26 +277,26 @@ namespace WindowsFormC1
         private void ocmPdtSave_Click(object sender, EventArgs e)
         {
             //TODO:validation
-            string tPdtCode = obtPdtCode.Text;
+            string tPdtCode = otbPdtCode.Text;
             if (string.IsNullOrEmpty(tPdtCode))
             {
                 MessageBox.Show("กรุณาระบุ รหัสสินค้า", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string tPdtName = obtPdtName.Text;
+            string tPdtName = otbPdtName.Text;
             if (string.IsNullOrEmpty(tPdtName))
             {
                 MessageBox.Show("กรุณาระบุ ชื่อสินค้า", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             int nPdtcQty = 0;
-            if (!int.TryParse(obtPdtQty.Text, out nPdtcQty))
+            if (!int.TryParse(otbPdtQty.Text, out nPdtcQty))
             {
                 MessageBox.Show("จำนวนสินค้าไม่ถูกต้อง", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             decimal cPdtPri = 0;
-            if (!decimal.TryParse(obtPdtPri.Text, out cPdtPri))
+            if (!decimal.TryParse(otbPdtPri.Text, out cPdtPri))
             {
                 MessageBox.Show("ราคาสินค้าไม่ถูกต้อง", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -353,10 +353,10 @@ namespace WindowsFormC1
 
         private void C_CLSxText()
         {
-            obtPdtCode.Text = "";
-            obtPdtName.Text = "";
-            obtPdtQty.Text = "";
-            obtPdtPri.Text = "";
+            otbPdtCode.Text = "";
+            otbPdtName.Text = "";
+            otbPdtQty.Text = "";
+            otbPdtPri.Text = "";
         }
 
         private void ocmPdtReset_Click(object sender, EventArgs e)

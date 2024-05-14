@@ -122,7 +122,7 @@ namespace WinFormSTD
 
         private void ocmSearchPdt_Click(object sender, EventArgs e)
         {
-            string tSearchPdtCode = obtPdtCode.Text.ToLower(); // Convert search query to lowercase for case-insensitive search
+            string tSearchPdtCode = otbPdtCode.Text.ToLower(); // Convert search query to lowercase for case-insensitive search
             LOAD_PDxList(tSearchPdtCode);
         }
 

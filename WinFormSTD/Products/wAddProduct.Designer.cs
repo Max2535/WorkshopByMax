@@ -30,10 +30,10 @@ namespace WinFormSTD.Products
         /// </summary>
         private void InitializeComponent()
         {
-            obtPdtCode = new TextBox();
-            obtPdtName = new TextBox();
-            obtPdtQty = new TextBox();
-            obtPdtPri = new TextBox();
+            otbPdtCode = new TextBox();
+            otbPdtName = new TextBox();
+            otbPdtQty = new TextBox();
+            otbPdtPri = new TextBox();
             olaPdtCode = new Label();
             olaPdtName = new Label();
             olaPdtQty = new Label();
@@ -44,33 +44,33 @@ namespace WinFormSTD.Products
             ((System.ComponentModel.ISupportInitialize)opbImgPdt).BeginInit();
             SuspendLayout();
             // 
-            // obtPdtCode
+            // otbPdtCode
             // 
-            obtPdtCode.Location = new System.Drawing.Point(155, 22);
-            obtPdtCode.Name = "obtPdtCode";
-            obtPdtCode.Size = new System.Drawing.Size(369, 31);
-            obtPdtCode.TabIndex = 0;
+            otbPdtCode.Location = new System.Drawing.Point(155, 22);
+            otbPdtCode.Name = "otbPdtCode";
+            otbPdtCode.Size = new System.Drawing.Size(369, 31);
+            otbPdtCode.TabIndex = 0;
             // 
-            // obtPdtName
+            // otbPdtName
             // 
-            obtPdtName.Location = new System.Drawing.Point(155, 74);
-            obtPdtName.Name = "obtPdtName";
-            obtPdtName.Size = new System.Drawing.Size(368, 31);
-            obtPdtName.TabIndex = 1;
+            otbPdtName.Location = new System.Drawing.Point(155, 74);
+            otbPdtName.Name = "otbPdtName";
+            otbPdtName.Size = new System.Drawing.Size(368, 31);
+            otbPdtName.TabIndex = 1;
             // 
-            // obtPdtQty
+            // otbPdtQty
             // 
-            obtPdtQty.Location = new System.Drawing.Point(155, 131);
-            obtPdtQty.Name = "obtPdtQty";
-            obtPdtQty.Size = new System.Drawing.Size(369, 31);
-            obtPdtQty.TabIndex = 2;
+            otbPdtQty.Location = new System.Drawing.Point(155, 131);
+            otbPdtQty.Name = "otbPdtQty";
+            otbPdtQty.Size = new System.Drawing.Size(369, 31);
+            otbPdtQty.TabIndex = 2;
             // 
-            // obtPdtPri
+            // otbPdtPri
             // 
-            obtPdtPri.Location = new System.Drawing.Point(155, 181);
-            obtPdtPri.Name = "obtPdtPri";
-            obtPdtPri.Size = new System.Drawing.Size(369, 31);
-            obtPdtPri.TabIndex = 3;
+            otbPdtPri.Location = new System.Drawing.Point(155, 181);
+            otbPdtPri.Name = "otbPdtPri";
+            otbPdtPri.Size = new System.Drawing.Size(369, 31);
+            otbPdtPri.TabIndex = 3;
             // 
             // olaPdtCode
             // 
@@ -151,10 +151,10 @@ namespace WinFormSTD.Products
             Controls.Add(olaPdtQty);
             Controls.Add(olaPdtName);
             Controls.Add(olaPdtCode);
-            Controls.Add(obtPdtPri);
-            Controls.Add(obtPdtQty);
-            Controls.Add(obtPdtName);
-            Controls.Add(obtPdtCode);
+            Controls.Add(otbPdtPri);
+            Controls.Add(otbPdtQty);
+            Controls.Add(otbPdtName);
+            Controls.Add(otbPdtCode);
             Name = "wAddProduct";
             Text = "wAddProduct";
             ((System.ComponentModel.ISupportInitialize)opbImgPdt).EndInit();
@@ -164,10 +164,10 @@ namespace WinFormSTD.Products
 
         #endregion
 
-        private System.Windows.Forms.TextBox obtPdtCode;
-        private System.Windows.Forms.TextBox obtPdtName;
-        private System.Windows.Forms.TextBox obtPdtQty;
-        private System.Windows.Forms.TextBox obtPdtPri;
+        private System.Windows.Forms.TextBox otbPdtCode;
+        private System.Windows.Forms.TextBox otbPdtName;
+        private System.Windows.Forms.TextBox otbPdtQty;
+        private System.Windows.Forms.TextBox otbPdtPri;
         private System.Windows.Forms.Label olaPdtCode;
         private System.Windows.Forms.Label olaPdtName;
         private System.Windows.Forms.Label olaPdtQty;
